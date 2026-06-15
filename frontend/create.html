@@ -81,7 +81,8 @@
             <div class="mb-3">
               <h4>Contributor</h4>
               <label for="nameInput" class="form-label">
-                Enter your contributor name as you would like it to appear for others to see.
+                Enter your contributor name as you would like it to appear for
+                others to see.
               </label>
               <input
                 type="text"
@@ -94,9 +95,69 @@
 
             <!--Submit Button-->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary me-md-2" type="button">★ Submit</button>
-              <button class="btn btn-primary" type="button">Clear</button>
+              <button
+                id="btn-SubmitPrompt"
+                class="btn btn-primary me-md-2"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                ★ Submit
+              </button>
+              <button
+                id="btn-ClearPrompt"
+                class="btn btn-primary"
+                type="button"
+              >
+                Clear
+              </button>
             </div>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="staticBackdrop"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="staticBackdropLabel">
+                      Thank you for your submission!
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">Your prompt has been received.</div>
+                  <div class="modal-footer">
+                    <button
+                      onclick="window.location.href = 'create.html'"
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Submit Another Prompt
+                    </button>
+                    <button
+                      onclick="window.location.href = 'prompts.html'"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Explore Prompts
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </main>

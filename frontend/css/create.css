@@ -7,7 +7,7 @@
   padding: 1.75rem 0;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4 {
   font-family: Georgia, serif;
   background-color: #010615;
   color: #ffffff;
@@ -24,7 +24,7 @@ body {
 }
 
 /* Create Page Buttons */
-.btn-primary {
+.btn, .btn-primary {
   --bs-btn-font-weight: 500;
   --bs-btn-font-family: Georgia, serif;
   --bs-btn-color: #ffffff;
