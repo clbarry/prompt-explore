@@ -1,3 +1,12 @@
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 1.75rem 0;
+}
+
 
 h1, h2, h3, h4, h5 {
   font-family: Georgia, serif;
@@ -15,15 +24,24 @@ body {
   flex-direction: column;
 }
 
-/*.site-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  padding: 1.75rem 0;
+/* Create Page Buttons */
+.btn-primary {
+  --bs-btn-font-weight: 600;
+  --bs-btn-font-family: Georgia, serif;
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: #7c3aed;
+  --bs-btn-border-color: #7c3aed;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #6b21a8;
+  --bs-btn-hover-border-color: #6b21a8;
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+  --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+  border-radius: 9999px;
 }
-  */
+
+/* Navigation Bar */
+/* The navigation bar has a consistent design across all pages*/
 
 .nav-bar {
   display: flex;
@@ -57,9 +75,3 @@ body {
   font-weight: 700;
 }
 
-@media (max-width: 576px) {
-  .nav-links {
-    gap: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
