@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="./css/create.css" />
     <title>Prompt Explore</title>
   </head>
+
+  <!--BODY-->
   <body>
     <div class="container">
       <!--Header-->
@@ -27,7 +29,72 @@
       </header>
 
       <!--Main Content-->
-      <main class="page-body" role="main"></main>
+      <main class="page-body" role="main">
+        <!--Container create-prompt-container-->
+        <div class="container create-prompt-container">
+          <div class="row">
+            <!--Title-->
+            <h1 class="title">Prompt Explore</h1>
+            <br /><br /><br /><br />
+            <h2 class="page-title">Create a Prompt</h2>
+            <br /><br /><br />
+
+            <h3>Create a prompt to share with the community.</h3>
+            <p>
+              Using the form below add a promt that has worked well for you and
+              share with the community.
+            </p>
+            <br /><br /><br />
+
+            <!--Use Field-->
+            <div class="mb-3">
+              <h4>Use</h4>
+              <label for="useInput" class="form-label">
+                Using a up to 4 word description, what is the primary use for
+                the prompt.
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="useInput"
+                placeholder="Enter the primary use"
+              />
+              <br />
+            </div>
+
+            <!--Prompt Field-->
+            <div class="mb-3">
+              <h4>Prompt</h4>
+              <label for="promptInput" class="form-label">
+                Enter the prompt you want to share with the community.
+              </label>
+              <textarea
+                class="form-control"
+                id="promptInput"
+                rows="5"
+                placeholder="Enter the prompt"
+              ></textarea>
+              <br />
+            </div>
+
+            <!--Contributor Name Field-->
+            <div class="mb-3">
+              <h4>Contributor</h4>
+              <label for="nameInput" class="form-label">
+                Enter your contributor name as you would like it to appear for others to see.
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="nameInput"
+                placeholder="Enter your contributor name"
+              />
+              <br />
+            </div>
+            
+          </div>
+        </div>
+      </main>
 
       <!--Footer-->
       <footer></footer>
