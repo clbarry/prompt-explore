@@ -7,9 +7,7 @@ router.get("/prompts", async (req, res) => {
   console.log("Received request for /api/prompts");
   try {
     const prompts = await promptDB.getPrompts();
-    res.json({
-      prompts,
-    });
+    res.json(prompts);
   } catch (error) {
     throw error;
   }
