@@ -75,11 +75,14 @@
   border-radius: 9999px;
   padding: 0.45rem 2rem 0.45rem 1rem;
   outline: none;
+  max-width: 160px;
+  cursor: pointer;
 }
 
 .filter-select option {
   background-color: #010a1d;
   color: #ffffff;
+  padding: 0.5rem;
 }
 
 .prompts-table-header {

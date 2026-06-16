@@ -26,23 +26,30 @@ async function fetchPrompts() {
 }
 
 function populateCategories(prompts) {
-  const allCategories = [];
+  const allUses = [];
 
   for (const prompt of prompts) {
-    const categories = prompt.categories ?? [];
-    for (const category of categories) {
-      allCategories.push(category);
+    if (prompt.use) {
+      allUses.push(prompt.use);
     }
   }
 
-  const uniqueCategories = [...new Set(allCategories)];
+  const uniqueUses = [];
+  const seen = new Set();
 
-  uniqueCategories.forEach((cat) => {
+  for (const use of allUses) {
+    if (!seen.has(use)) {
+      seen.add(use);
+      uniqueUses.push(use);
+    }
+  }
+
+  for (const use of uniqueUses) {
     const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
+    option.value = use;
+    option.textContent = use;
     filterCategory.appendChild(option);
-  });
+  }
 }
 
 function getFiltered() {
@@ -56,8 +63,7 @@ function getFiltered() {
       !search || (p.use ?? "").toLowerCase().includes(search);
 
     const matchesRating = (p.averageRating ?? 0) >= minRating;
-    const matchesCategory =
-      !category || (p.categories ?? []).includes(category);
+    const matchesCategory = !category || p.use === category;
     return matchesSearch && matchesRating && matchesCategory;
   });
 
@@ -70,22 +76,23 @@ function getFiltered() {
 }
 
 function buildStars(promptId, userRating) {
-  const group = document.createElement('div');
-  group.className = 'star-group';
+  const group = document.createElement("div");
+  group.className = "star-group";
 
   for (let i = 1; i <= 5; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'star-btn';
-    btn.setAttribute('aria-label', `Rate ${i} star${i > 1 ? 's' : ''}`);
+    const btn = document.createElement("button");
+    btn.className = "star-btn";
+    btn.setAttribute("aria-label", `Rate ${i} star${i > 1 ? "s" : ""}`);
     btn.dataset.value = i;
 
-    const img = document.createElement('img');
-    img.className = 'star-icon';
-    img.src = i <= userRating ? '../public/star.svg' : '../public/empty-star.svg';
-    img.alt = '';
+    const img = document.createElement("img");
+    img.className = "star-icon";
+    img.src =
+      i <= userRating ? "../public/star.svg" : "../public/empty-star.svg";
+    img.alt = "";
     btn.appendChild(img);
 
-    btn.addEventListener('click', () => ratePrompt(promptId, i, group));
+    btn.addEventListener("click", () => ratePrompt(promptId, i, group));
     group.appendChild(btn);
   }
 
@@ -93,18 +100,20 @@ function buildStars(promptId, userRating) {
 }
 
 async function ratePrompt(promptId, value, starGroup) {
-  starGroup.querySelectorAll('.star-btn').forEach((btn) => {
-    const img = btn.querySelector('.star-icon');
-    img.src = parseInt(btn.dataset.value) <= value ? '../public/star.svg' : '../public/empty-star.svg';
+  starGroup.querySelectorAll(".star-btn").forEach((btn) => {
+    const img = btn.querySelector(".star-icon");
+    img.src =
+      parseInt(btn.dataset.value) <= value
+        ? "../public/star.svg"
+        : "../public/empty-star.svg";
   });
 
-  await fetch('/api/rate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  await fetch("/api/rate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ promptId, rating: value }),
   });
 }
-
 
 async function deletePrompt(promptId) {
   await fetch("/api/delete", {
