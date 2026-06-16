@@ -1,5 +1,5 @@
 import express from 'express';
-import listingsRouter from './routes/listings.js';
+import promptsRouter from './routes/prompts.js';
 
 console.log("Init backend...");
 
@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3300;
 
 app.use(express.static("frontend"));
 
-app.use("/api", listingsRouter);
+app.use("/api", promptsRouter);
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);

@@ -2,13 +2,15 @@ import { MongoClient } from "mongodb";
 function PromptExplorerDB() {
   const me = {};
 
-  const URI = "mongodb://localhost:37017";
-  const connect = () => {
-    const client = new MongoClient(URI);
-    const prompts = "";
+  const URI = "mongodb://localhost:27017";
+  const DB_NAME = "promptexplore";
+  const COLLECTION = "prompts";
 
-    return { client, prompts };
-  };
+const connect = () => {
+  const client = new MongoClient(URI);
+  const prompts = client.db(DB_NAME).collection(COLLECTION);
+  return { client, prompts };
+};
   me.getPrompts = async (query = {}) => {
     const { client, prompts } = connect();
 
