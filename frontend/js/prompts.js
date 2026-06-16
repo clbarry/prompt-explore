@@ -47,7 +47,7 @@ function populateCategories(prompts) {
   for (const use of uniqueUses) {
     const option = document.createElement("option");
     option.value = use;
-    option.textContent = use;
+    option.textContent = use.length > 10 ? use.slice(0, 10) + "..." : use;
     filterCategory.appendChild(option);
   }
 }
