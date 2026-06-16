@@ -14,24 +14,92 @@
     <title>Prompt Explore</title>
   </head>
   <body>
-    <div class="container">
-      <!--Header-->
-      <header class="site-header">
-        <nav class="nav-bar container-fluid px-5">
-          <ul class="nav-links">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="prompts.html" class="nav-link active">Prompts</a></li>
-            <li><a href="create.html" class="nav-link">Create</a></li>
-          </ul>
-        </nav>
-      </header>
+    <header class="site-header">
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-brand">Prompt Explore</a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="prompts.html" class="nav-link active">Prompts</a></li>
+          <li><a href="create.html" class="nav-link">Create</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <!--Main Content-->
-      <main class="page-body" role="main"></main>
+    <!--Main Content-->
+    <main class="page-body" role="main">
+      <div class="container-fluid px-5">
+        <!-- Search + Filters bar -->
+        <div class="filters-bar">
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Search a category..."
+            aria-label="Search by category"
+          />
+          <div class="filters-group">
+            <span class="filters-label">Filters</span>
+            <select
+              id="filter-rating"
+              class="filter-select"
+              aria-label="Filter by rating"
+            >
+              <option value="">Rating</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+            </select>
+            <select
+              id="filter-category"
+              class="filter-select"
+              aria-label="Filter by category"
+            >
+              <option value="">Category</option>
+            </select>
+          </div>
+          <div class="sort-group">
+            <select
+              id="sort-by"
+              class="filter-select"
+              aria-label="Sort prompts"
+            >
+              <option value="">Sort By</option>
+              <option value="rating-desc">Rating: High to Low</option>
+              <option value="rating-asc">Rating: Low to High</option>
+            </select>
+          </div>
+        </div>
 
-      <!--Footer-->
-      <footer></footer>
-    </div>
+        <!-- Table header -->
+        <div class="prompts-table-header">
+          <span class="col-rating-header">Average Rating</span>
+          <span class="col-prompt-header">Prompts</span>
+        </div>
+
+        <!-- Prompt rows -->
+        <div id="prompts-list">
+          <!-- populated by prompts.js -->
+        </div>
+
+        <!-- Empty state -->
+        <p id="empty-state" class="empty-state d-none">No prompts found.</p>
+
+        <!-- Pagination -->
+        <div class="pagination-bar">
+          <button id="prev-page" class="page-btn" aria-label="Previous page">
+            &#9664;
+          </button>
+          <span id="page-indicator" class="page-indicator">Page 1</span>
+          <button id="next-page" class="page-btn" aria-label="Next page">
+            &#9654;
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!--Footer-->
+    <footer></footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

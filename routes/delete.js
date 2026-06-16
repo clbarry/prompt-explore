@@ -1,0 +1,19 @@
+// this will delete a prompt and move it to a new collection, called 'deleted'
+import express from "express";
+import promptDB from "../db/promptDB.js";
+
+const router = express.Router();
+
+router.get("/prompts", async (req, res) => {
+  console.log("Received request for /api/prompts");
+  try {
+    const prompts = await promptDB.getPrompts();
+    res.json({
+      prompts,
+    });
+  } catch (error) {
+    throw error;
+  }
+});
+
+export default router;

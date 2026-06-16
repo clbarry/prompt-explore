@@ -1,0 +1,170 @@
+.site-header {
+  position: relative;
+  padding: 1.75rem 0;
+}
+
+.page-body {
+  padding-top: 0;
+}
+
+.nav-bar .nav-brand {
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-family: Georgia, serif;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0 2rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1.5px solid #ffffff;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  width: 280px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #ffffffaf;
+}
+
+.filters-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1rem;
+}
+
+.filters-label {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sort-group {
+  margin-left: auto;
+}
+
+.filter-select {
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1.5px solid #ffffff;
+  border-radius: 9999px;
+  padding: 0.45rem 2rem 0.45rem 1rem;
+  outline: none;
+}
+
+.filter-select option {
+  background-color: #010a1d;
+  color: #ffffff;
+}
+
+.prompts-table-header {
+}
+
+.col-rating-header {
+}
+
+.col-prompt-header {
+}
+
+.prompt-row {
+}
+
+.prompt-rating {
+}
+
+.prompt-content {
+}
+
+.prompt-text {
+}
+
+.prompt-actions {
+}
+
+.rate-label {
+}
+
+.star-group {
+}
+
+.star-btn {
+}
+
+.star-btn:hover {
+}
+
+.star-btn.filled {
+  color: #4db8e8;
+}
+
+.star-btn.empty {
+}
+
+.delete-btn {
+}
+
+.delete-btn:hover {
+  color: #ff4444;
+  transform: scale(1.1);
+}
+
+.category-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.category-tag {
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  color: #ffffff;
+  background-color: #7c3aed;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.3rem 0.9rem;
+}
+
+.empty-state {
+}
+
+.pagination-bar {
+}
+
+.page-btn {
+}
+
+.page-btn:hover {
+  color: #7c3aed;
+}
+
+.page-btn:disabled {
+}
+
+.page-indicator {
+}
