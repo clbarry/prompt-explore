@@ -83,54 +83,116 @@
 }
 
 .prompts-table-header {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid #ffffff33;
+}
+
+.col-rating-header,
+.col-prompt-header {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .col-rating-header {
+  text-align: center;
 }
 
 .col-prompt-header {
+  padding-left: 0.75rem;
 }
 
 .prompt-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid #ffffff1f;
 }
 
 .prompt-rating {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
 }
 
 .prompt-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-left: 0.75rem;
 }
 
 .prompt-text {
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e6e9f0;
+  margin: 0;
 }
 
 .prompt-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .rate-label {
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  color: #ffffff;
 }
 
 .star-group {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
 }
 
 .star-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.15s ease;
 }
 
 .star-btn:hover {
+  transform: scale(1.15);
 }
 
-.star-btn.filled {
-  color: #4db8e8;
-}
-
-.star-btn.empty {
+.star-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 .delete-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.15s ease;
 }
 
 .delete-btn:hover {
-  color: #ff4444;
   transform: scale(1.1);
+}
+
+.delete-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
 }
 
 .category-tags {
@@ -151,12 +213,28 @@
 }
 
 .empty-state {
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  color: #ffffffaf;
+  text-align: center;
+  padding: 3rem 0;
 }
 
 .pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
 }
 
 .page-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.15s ease;
 }
 
 .page-btn:hover {
@@ -164,7 +242,12 @@
 }
 
 .page-btn:disabled {
+  color: #ffffff3a;
+  cursor: default;
 }
 
 .page-indicator {
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  color: #ffffff;
 }
