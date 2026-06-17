@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node ./node_modules/nodemon/bin/nodemon.js backend.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
