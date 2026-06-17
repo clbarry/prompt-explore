@@ -35,7 +35,6 @@
         <!--Container create-prompt-container-->
         <div class="container create-prompt-container">
           <div class="row">
-           
             <br /><br />
             <h2 class="page-title"></h2>
             <br /><br />
@@ -63,56 +62,60 @@
               <br />
             </div>
 
-            <!--Prompt Field-->
-            <div class="mb-3">
-              <h4>Prompt</h4>
-              <label for="promptInput" class="form-label">
-                Enter the prompt you want to share with the community.
-              </label>
-              <textarea
-                class="form-control"
-                id="promptInput"
-                rows="5"
-                placeholder="Enter the prompt"
-              ></textarea>
-              <br />
-            </div>
+            <form id="formCreatePrompt">
+              <!--Prompt Field-->
+              <div class="mb-3">
+                <h4>Prompt</h4>
+                <label for="promptInput" class="form-label">
+                  Enter the prompt you want to share with the community.
+                </label>
+                <textarea
+                  class="form-control"
+                  id="promptInput"
+                  rows="5"
+                  placeholder="Enter the prompt"
+                ></textarea>
+                <br />
+              </div>
 
-            <!--Contributor Name Field-->
-            <div class="mb-3">
-              <h4>Contributor</h4>
-              <label for="nameInput" class="form-label">
-                Enter your contributor name as you would like it to appear for
-                others to see.
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="nameInput"
-                placeholder="Enter your contributor name"
-              />
-              <br />
-            </div>
+              <!--Contributor Name Field-->
+              <div class="mb-3">
+                <h4>Contributor</h4>
+                <label for="nameInput" class="form-label">
+                  Enter your contributor name as you would like it to appear for
+                  others to see.
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nameInput"
+                  placeholder="Enter your contributor name"
+                />
+                <br />
+              </div>
 
-            <!--Submit Button-->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button
-                id="btn-SubmitPrompt"
-                class="btn btn-primary me-md-2"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              >
-                ★ Submit
-              </button>
-              <button
-                id="btn-ClearPrompt"
-                class="btn btn-primary"
-                type="button"
-              >
-                Clear
-              </button>
-            </div>
+              <!--Submit Button-->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button
+                  id="btn-SubmitPrompt"
+                  class="btn btn-primary me-md-2"
+                  type="button submit"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                >
+                  ★ Submit
+                </button>
+
+                <button
+                  id="btn-ClearPrompt"
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+            </form>
+            <p id="log"></p>
 
             <!-- Modal -->
             <div
@@ -158,7 +161,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </main>
