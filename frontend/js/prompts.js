@@ -139,13 +139,18 @@ async function ratePrompt(promptId, value, starGroup) {
 }
 
 async function deletePrompt(promptId) {
-  await fetch("/api/delete", {
+  const response = await fetch("/api/delete", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ promptId }),
   });
 
-  allPrompts = allPrompts.filter((p) => p._id !== promptId);
+  if (!response.ok) {
+    console.error("Delete failed:", response.status);
+    return;
+  }
+
+  allPrompts = allPrompts.filter((p) => String(p._id) !== String(promptId));
   currentPage = 1;
   render();
 }
