@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 function PromptExplorerDB() {
   const me = {};
 
@@ -19,6 +19,22 @@ function PromptExplorerDB() {
       console.log("Fetched data from Mongo:", data);
       return data;
       // return prompts.find({}).toArray().finally(() => client.close());
+    } catch (err) {
+      throw err;
+    } finally {
+      await client.close();
+    }
+  };
+
+  me.addRating = async (promptId, rating) => {
+    const { client, prompts } = connect();
+
+    try {
+      const result = await prompts.updateOne(
+        { _id: new ObjectId(promptId) },
+        { $inc: { [`rating.${rating}`]: 1 } },
+      );
+      return result;
     } catch (err) {
       throw err;
     } finally {

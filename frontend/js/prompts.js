@@ -25,6 +25,22 @@ async function fetchPrompts() {
   render();
 }
 
+function calcAverage(rating) {
+  if (!rating) return 0;
+
+  let totalStars = 0;
+  let totalVotes = 0;
+
+  for (let star = 1; star <= 5; star++) {
+    const count = rating[star] ?? 0;
+    totalStars += star * count;
+    totalVotes += count;
+  }
+
+  if (totalVotes === 0) return 0;
+  return totalStars / totalVotes;
+}
+
 function populateCategories(prompts) {
   const allUses = [];
 
@@ -61,16 +77,15 @@ function getFiltered() {
   let results = allPrompts.filter((p) => {
     const matchesSearch =
       !search || (p.use ?? "").toLowerCase().includes(search);
-
-    const matchesRating = (p.averageRating ?? 0) >= minRating;
+    const matchesRating = calcAverage(p.rating) >= minRating;
     const matchesCategory = !category || p.use === category;
     return matchesSearch && matchesRating && matchesCategory;
   });
 
   if (sort === "rating-desc")
-    results.sort((a, b) => (b.averageRating ?? 0) - (a.averageRating ?? 0));
+    results.sort((a, b) => calcAverage(b.rating) - calcAverage(a.rating));
   if (sort === "rating-asc")
-    results.sort((a, b) => (a.averageRating ?? 0) - (b.averageRating ?? 0));
+    results.sort((a, b) => calcAverage(a.rating) - calcAverage(b.rating));
 
   return results;
 }
@@ -108,11 +123,19 @@ async function ratePrompt(promptId, value, starGroup) {
         : "../public/empty-star.svg";
   });
 
+  const prompt = allPrompts.find((p) => String(p._id) === String(promptId));
+  if (prompt) {
+    if (!prompt.rating) prompt.rating = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    prompt.rating[value] = (prompt.rating[value] ?? 0) + 1;
+  }
+
   await fetch("/api/rate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ promptId, rating: value }),
   });
+
+  setTimeout(() => render(), 600);
 }
 
 async function deletePrompt(promptId) {
@@ -134,7 +157,7 @@ function buildPromptRow(prompt) {
 
   const ratingCol = document.createElement("div");
   ratingCol.className = "prompt-rating";
-  ratingCol.textContent = `${(prompt.averageRating ?? 0).toFixed(1)}/5.0`;
+  ratingCol.textContent = `${calcAverage(prompt.rating).toFixed(1)}/5.0`;
 
   const contentCol = document.createElement("div");
   contentCol.className = "prompt-content";
