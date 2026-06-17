@@ -3,17 +3,14 @@
 
 /* MODAL CODE (BOOTSTRAP) */
 /* https://getbootstrap.com/docs/5.3/components/modal/ */
-const myModal = document.getElementById("myModal");
-const myInput = document.getElementById("myInput");
 
-myModal.addEventListener("shown.bs.modal", () => {
-  myInput.focus();
-});
 
-/* CLEARING THE FORM */
+/* DEFINE CONSTANTS */
 const clearBtn = document.getElementById("btn-ClearPrompt");
-const form = document.querySelector("formCreatePrompt");
+const form = document.getElementById("formCreatePrompt");
+const log = document.getElementById("log");
 
+/* CLEAR THE FORM */
 function logReset(event) {
   log.textContent = "Form reset!";
 }
@@ -28,21 +25,24 @@ clearBtn.addEventListener("click", () => {
 /* Resources: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_forms_through_JavaScript */
 /* SUBMITTING THE FORM DATA TO THE BACKEND */
 
-
 async function sendData() {
   // Associate the FormData object with the form element
   const formData = new FormData(form);
 
   try {
-    const response = await fetch("/api.", {
+    const response = await fetch("/api/create", {
       method: "POST",
-      // Set the FormData instance as the request body
-      body: formData,
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ 
+        use: formData.get("use"), 
+        prompt: formData.get("prompt"), 
+        contributor: formData.get("contributor"), 
+        rating: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 } }),
     });
     console.log(await response.json());
   } catch (e) {
     console.error(e);
-  }
+    }
 }
 
 // Take over form submission
