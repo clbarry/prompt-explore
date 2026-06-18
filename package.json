@@ -20,9 +20,10 @@
     "globals": "^17.6.0",
     "http-server": "^14.1.1",
     "prettier": "^3.8.3",
-    "reload": "^3.4.3"
+    "reload": "^3.2.0"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongodb": "^7.3.0",
     "nodemon": "^3.1.14"
