@@ -46,7 +46,7 @@
             </p>
             <br /><br /><br />
 
-            <form id="formCreatePrompt"></form>
+            <form id="formCreatePrompt">
 
             <!--Use Field-->
             <div class="mb-3">
@@ -59,6 +59,7 @@
                 type="text"
                 class="form-control"
                 id="use"
+                name="use"
                 placeholder="Enter the primary use"
               />
               <br />
@@ -73,6 +74,7 @@
                 <textarea
                   class="form-control"
                   id="prompt"
+                  name="prompt"
                   rows="5"
                   placeholder="Enter the prompt"
                 ></textarea>
@@ -90,6 +92,7 @@
                   type="text"
                   class="form-control"
                   id="contributor"
+                  name="contributor"
                   placeholder="Enter your contributor name"
                 />
                 <br />
@@ -100,7 +103,7 @@
                 <button
                   id="btn-SubmitPrompt"
                   class="btn btn-primary me-md-2"
-                  type="button submit"
+                  type="submit"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 >

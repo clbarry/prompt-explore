@@ -39,6 +39,16 @@ function PromptExplorerDB() {
     }
   };
 
+  /* create a new prompt */
+  me.createPrompt = async (record) => {
+    const { client, prompts } = connect();
+    try {
+      return await prompts.insertOne(record);
+    } finally {
+      await client.close();
+    }
+  };
+
   me.addRating = async (promptId, rating) => {
     const { client, prompts } = await connect();
 
