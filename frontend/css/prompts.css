@@ -177,7 +177,19 @@
   height: 22px;
   display: block;
 }
+.submit-rating-btn {
+  background-color: #6f42c1;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
 
+.submit-rating-btn:hover {
+  background-color: #5a32a3;
+}
 .delete-btn {
   background: none;
   border: none;

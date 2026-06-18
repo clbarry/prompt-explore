@@ -90,7 +90,7 @@ function getFiltered() {
   return results;
 }
 
-function buildStars(promptId, userRating) {
+function buildStars(promptId, userRating, state) {
   const group = document.createElement("div");
   group.className = "star-group";
 
@@ -107,13 +107,40 @@ function buildStars(promptId, userRating) {
     img.alt = "";
     btn.appendChild(img);
 
-    btn.addEventListener("click", () => ratePrompt(promptId, i, group));
+    btn.addEventListener("click", () => {
+      state.selected = i;
+      group.querySelectorAll(".star-btn").forEach((b) => {
+        const bi = b.querySelector(".star-icon");
+        bi.src =
+          parseInt(b.dataset.value) <= i
+            ? "../public/star.svg"
+            : "../public/empty-star.svg";
+      });
+    });
     group.appendChild(btn);
   }
 
   return group;
 }
 
+async function submitRating(promptId, state) {
+  if (!state.selected) return;
+  const value = state.selected;
+
+  const prompt = allPrompts.find((p) => String(p._id) === String(promptId));
+  if (prompt) {
+    if (!prompt.rating) prompt.rating = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    prompt.rating[value] = (prompt.rating[value] ?? 0) + 1;
+  }
+
+  await fetch("/api/rate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ promptId, rating: value }),
+  });
+
+  render();
+}
 async function ratePrompt(promptId, value, starGroup) {
   starGroup.querySelectorAll(".star-btn").forEach((btn) => {
     const img = btn.querySelector(".star-icon");
@@ -178,7 +205,15 @@ function buildPromptRow(prompt) {
   rateLabel.className = "rate-label";
   rateLabel.textContent = "Rate it:";
 
-  const stars = buildStars(prompt._id, prompt.userRating ?? 0);
+  const ratingState = { selected: prompt.userRating ?? 0 };
+  const stars = buildStars(prompt._id, prompt.userRating ?? 0, ratingState);
+
+  const submitBtn = document.createElement("button");
+  submitBtn.className = "submit-rating-btn";
+  submitBtn.textContent = "Submit rating";
+  submitBtn.addEventListener("click", () =>
+    submitRating(prompt._id, ratingState),
+  );
 
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "delete-btn";
@@ -203,6 +238,7 @@ function buildPromptRow(prompt) {
 
   actions.appendChild(rateLabel);
   actions.appendChild(stars);
+  actions.appendChild(submitBtn);
   actions.appendChild(deleteBtn);
   actions.appendChild(tags);
 
