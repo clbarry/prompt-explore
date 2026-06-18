@@ -165,7 +165,7 @@ async function ratePrompt(promptId, value, starGroup) {
   setTimeout(() => render(), 600);
 }
 
-async function deletePrompt(promptId) {
+async function doDelete(promptId) {
   const response = await fetch("/api/delete", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -180,6 +180,65 @@ async function deletePrompt(promptId) {
   allPrompts = allPrompts.filter((p) => String(p._id) !== String(promptId));
   currentPage = 1;
   render();
+}
+
+function countVotes(rating) {
+  if (!rating) return 0;
+  let total = 0;
+  for (let star = 1; star <= 5; star++) total += rating[star] ?? 0;
+  return total;
+}
+
+function deletePrompt(promptId) {
+  const prompt = allPrompts.find((p) => String(p._id) === String(promptId));
+  if (!prompt) return;
+
+  const votes = countVotes(prompt.rating);
+  const avg = calcAverage(prompt.rating);
+
+  if (votes > 5 && avg < 3) {
+    doDelete(promptId);
+  } else {
+    openDeleteModal(promptId);
+  }
+}
+function openDeleteModal(promptId) {
+  const overlay = document.createElement("div");
+  overlay.className = "delete-modal-overlay";
+
+  const modal = document.createElement("div");
+  modal.className = "delete-modal";
+
+  const message = document.createElement("p");
+  message.className = "delete-modal-text";
+  message.textContent =
+    "This prompt doesn't have many bad reviews. Do you want to delete it because the prompt is inappropriate?";
+
+  const btnRow = document.createElement("div");
+  btnRow.className = "delete-modal-actions";
+
+  const noBtn = document.createElement("button");
+  noBtn.className = "modal-btn modal-btn-no";
+  noBtn.textContent = "No";
+
+  const yesBtn = document.createElement("button");
+  yesBtn.className = "modal-btn modal-btn-yes";
+  yesBtn.textContent = "Yes";
+
+  const close = () => overlay.remove();
+
+  noBtn.addEventListener("click", close);
+  yesBtn.addEventListener("click", () => {
+    doDelete(promptId);
+    close();
+  });
+
+  btnRow.appendChild(noBtn);
+  btnRow.appendChild(yesBtn);
+  modal.appendChild(message);
+  modal.appendChild(btnRow);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
 }
 
 function buildPromptRow(prompt) {
