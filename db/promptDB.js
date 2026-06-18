@@ -1,13 +1,26 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
+import "dotenv/config";
+
 function PromptExplorerDB() {
   const me = {};
 
-  const URI = "mongodb://localhost:27017";
+
+  const USER = process.env.MONGOUSER;
+  const PASS = process.env.MONGOPASS;
+  console.log("USER:", process.env.MONGOUSER, "PASS set?", !!process.env.MONGOPASS);
+  const URI = `mongodb+srv://${USER}:${PASS}@prompt-explore-cluster.bu1xeuj.mongodb.net/?appName=prompt-explore-cluster`;
+  // const URI = "mongodb://localhost:27017";
   const DB_NAME = "promptexplore";
   const COLLECTION = "prompts";
   const RECENTLY_DELETED = "recently_deleted";
   const connect = () => {
-    const client = new MongoClient(URI);
+    const client = new MongoClient(URI, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      },
+    });
     const prompts = client.db(DB_NAME).collection(COLLECTION);
     return { client, prompts };
   };
@@ -27,7 +40,7 @@ function PromptExplorerDB() {
   };
 
   me.addRating = async (promptId, rating) => {
-    const { client, prompts } = connect();
+    const { client, prompts } = await connect();
 
     try {
       const result = await prompts.updateOne(
