@@ -103,7 +103,7 @@
                 <button
                   id="btn-SubmitPrompt"
                   class="btn btn-primary me-md-2"
-                  type="submit button"
+                  type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 >
@@ -118,8 +118,6 @@
                   Clear
                 </button>
               </div>
-            </form>
-            <p id="log"></p>
 
             <!-- Modal -->
             <div
@@ -135,7 +133,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title fs-5" id="staticBackdropLabel">
-                      Thank you for your submission!
+                      Confirm your prompt submission.  
                     </h5>
                     <button
                       type="button"
@@ -144,26 +142,28 @@
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div class="modal-body">Your prompt has been received.</div>
+                  <div class="modal-body">Ready to submit your prompt? Select Submit to confirm or Edit to revise.</div>
                   <div class="modal-footer">
                     <button
-                      onclick="window.location.href = 'create.html'"
-                      type="button"
+                      type="submit button"
                       class="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
-                      Submit Another Prompt
+                      Submit
                     </button>
+
                     <button
-                      onclick="window.location.href = 'prompts.html'"
+                      data-bs-dismiss="modal"
                       type="button"
                       class="btn btn-primary"
                     >
-                      Explore Prompts
+                      Edit
                     </button>
                   </div>
                 </div>
               </div>
+            </form>
+            <p id="log"></p>
             </div>
           </div>
         </div>

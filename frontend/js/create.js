@@ -39,10 +39,18 @@ async function sendData() {
         contributor: formData.get("contributor"), 
         rating: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 } }),
     });
-    console.log(await response.json());
+    const result = await response.json();
+
+    if (response.ok) {
+      form.reset();
+      log.textContent = "Prompt submitted successfully!";
+    } else {
+      log.textContent = result.error || "Submit failed. Please try again.";
+    }
   } catch (e) {
     console.error(e);
-    }
+    log.textContent = "An error occurred. Please try again.";
+  }
 }
 
 // Take over form submission
