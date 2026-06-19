@@ -7,7 +7,7 @@
     padding-left: 1.0rem ;
 }
 
-h2, h3, h4 {
+h2, h3, h4{
   font-family: Georgia, serif;
   background-color: #010615;
   color: #ffffff;
@@ -21,6 +21,11 @@ body {
   color: #ffffff;
   display: flex;
   flex-direction: column;
+}
+
+/* Moderator Alert */
+#moderatorAlert h4{
+  background-color: #cbf9ff;
 }
 
 /* Create Page Buttons */

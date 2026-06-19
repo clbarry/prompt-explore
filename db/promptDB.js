@@ -39,16 +39,6 @@ function PromptExplorerDB() {
     }
   };
 
-  /* create a new prompt */
-  me.createPrompt = async (record) => {
-    const { client, prompts } = connect();
-    try {
-      return await prompts.insertOne(record);
-    } finally {
-      await client.close();
-    }
-  };
-
   me.addRating = async (promptId, rating) => {
     const { client, prompts } = await connect();
 
@@ -97,6 +87,35 @@ function PromptExplorerDB() {
       await client.close();
     }
   };
+
+
+  /* CREATE HTML */
+  /* create a new prompt */
+  me.createPrompt = async (record) => {
+    const { client, prompts } = connect();
+    try {
+      return await prompts.insertOne(record);
+    } finally {
+      await client.close();
+    }
+  };
+
+  /* MODERATOR HTML */
+
+  /* Load a prompt by ID from Recently Deleted */
+  me.getRecentlyDeletedById = async (id) => {
+    const { client } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      return await recentlyDeleted.findOne({ _id: new ObjectId(id) });
+    } catch (err) {
+      throw err;
+    } finally {
+      await client.close();
+    }
+  };
+
+
   return me;
 }
 
