@@ -8,7 +8,12 @@ router.get("/recently-deleted", async (req, res) => {
   console.log("Received request for /api/recently-deleted");
 
   try {
-    const prompt = await promptDB.getRecentlyDeletedById(id);
+    const { promptId } = req.query;
+
+    const prompt = promptId
+      ? await promptDB.getRecentlyDeletedById(promptId)
+      : await promptDB.getFirstRecentlyDeleted();
+
     if (!prompt) {
       return res.status(404).json({ error: "Prompt not found" });
     }
