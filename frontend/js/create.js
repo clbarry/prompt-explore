@@ -17,7 +17,6 @@ function logReset(event) {
 
 form.addEventListener("reset", logReset);
 
-
 clearBtn.addEventListener("click", () => {
   document.getElementById("formCreatePrompt").reset();
 });
