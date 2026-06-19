@@ -41,6 +41,14 @@
             <h2 class="page-title"></h2>
             <br /><br />
 
+            <h3>Moderator: Prompt Review</h3>
+            <br />
+            <p>
+              As a moderator, please review these prompts which users have
+              tagged for deletion.
+            </p>
+            <br />
+
             <!--Moderator Alert-->
             <!-- https://getbootstrap.com/docs/5.3/components/alerts/#additional-content -->
             <div id="moderatorAlert" class="alert alert-info" role="alert">
@@ -50,40 +58,35 @@
                 been tagged for deletion by users. If you are not a moderator,
                 please return to the home page.
               </p>
+              <hr />
+              <p class="mb-0"></p>
+              <p>
+                <span style="display: block"
+                  ><em><strong> Load Prompt</strong></em> will load a
+                  prompt from the recently_deleted collection for review.</span
+                >
+                <span style="display: block"
+                  ><em><strong> Delete Prompt</strong></em> will wipe this
+                  prompt from the recently_deleted collection forever.</span
+                >
+                <span style="display: block"
+                  ><em><strong>Approve Edits </strong></em>will send the prompt back
+                  to the main collection, along with any edits you might have
+                  made.</span
+                >
+                <span style="display: block"
+                  ><em><strong>Save Edits </strong></em>will save the prompt in
+                  the recently_deleted collection for further action at a later
+                  time.</span
+                >
+                <span style="display: block"
+                  ><em><strong>Skip </strong></em>will skip the item and save it
+                  in the recently_deleted collection for further action at a
+                  later time.</span
+                >
+              </p>
             </div>
 
-            <h3>Moderator: Review Prompts</h3>
-            <br />
-            <p>
-              As a moderator, please review these prompts which users have
-              tagged for deletion.
-            </p>
-            <br />
-            <p>
-              <span style="display: block"
-                ><em><strong> Load Deleted Prompt</strong></em> will load a
-                prompt from the recently_deleted collection for review.</span
-              >
-              <span style="display: block"
-                ><em><strong> Delete Prompt</strong></em> will wipe this prompt
-                from the recently_deleted collection forever.</span
-              >
-              <span style="display: block"
-                ><em><strong>Approve </strong></em>will send the prompt back to
-                the main collection, along with any edits you might have
-                made.</span
-              >
-              <span style="display: block"
-                ><em><strong>Save Edits </strong></em>will save the prompt in
-                the recently_deleted collection for further action at a later
-                time.</span
-              >
-              <span style="display: block"
-                ><em><strong>Skip </strong></em>will skip the item and save it
-                in the recently_deleted collection for further action at a later
-                time.</span
-              >
-            </p>
             <br /><br /><br /><br /><br />
 
             <form id="formModerator">
@@ -136,13 +139,14 @@
 
               <!--Action Buttons-->
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <!--Fetch Deleted Prompt-->
+
+                <!--Fetch Prompt-->
                 <button
-                  id="btn-LoadDeletedPrompt"
+                  id="btn-LoadPrompt"
                   class="btn btn-primary me-md-2"
                   type="button"
                 >
-                  Load Deleted Prompt
+                  Load Prompt
                 </button>
 
                 <!--Delete Button-->
@@ -160,7 +164,7 @@
                   class="btn btn-primary me-md-2"
                   type="button"
                 >
-                  Approve
+                  Approve Edits
                 </button>
 
                 <!--Save Edits Button-->
