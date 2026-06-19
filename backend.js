@@ -9,7 +9,7 @@ import createRouter from "./routes/create.js";
 //import modApproveRouter from "./routes/mod_approve.js";
 //import modDeleteRouter from "./routes/mod_delete.js";
 import modLoadRouter from "./routes/mod_load.js";
-//import modSaveRouter from "./routes/mod_saveedit.js";
+import modSaveRouter from "./routes/mod_saveedit.js";
 
 
 console.log("Init backend...");
@@ -25,10 +25,9 @@ app.use("/api", rateRouter);
 app.use("/api", deleteRouter);
 
 app.use("/api", createRouter);
-//app.use("/api", modApproveRouter);
+app.use("/api", modSaveRouter);
 //app.use("/api", modDeleteRouter);
 app.use("/api", modLoadRouter);
-//app.use("/api", modSaveRouter);
 
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
