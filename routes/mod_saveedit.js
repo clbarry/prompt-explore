@@ -11,7 +11,7 @@ router.post("/mod_saveedits", async (req, res) => {
   }
 
   try {
-    const result = await promptDB.updatePromptById(promptId, {
+    const result = await promptDB.updateRecentlyDeletedById(promptId, {
       use,
       prompt,
       contributor,

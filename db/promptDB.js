@@ -116,6 +116,22 @@ function PromptExplorerDB() {
     }
   };
 
+  /* SAVE EDITS MODERATOR HTML */
+  /* Update a recently_deleted prompt by ID with new data */
+  me.updateRecentlyDeletedById = async (promptId, updates) => {
+    const { client } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      return await recentlyDeleted.updateOne(
+        { _id: new ObjectId(promptId) },
+        { $set: updates },
+      );
+    } finally {
+      await client.close();
+    }
+  };
+
+  /* LOAD MODERATOR HTML */
   /* Load a prompt by ID from Recently Deleted */
   me.getRecentlyDeletedById = async (promptId) => {
     const { client } = connect();
@@ -141,7 +157,7 @@ function PromptExplorerDB() {
       await client.close();
     }
   };
-  
+
   /* Load the next prompt from Recently Deleted */
   me.getNextRecentlyDeleted = async (afterId) => {
     const { client } = connect();

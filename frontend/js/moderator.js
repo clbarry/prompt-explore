@@ -51,7 +51,9 @@ btnLoadPrompt.addEventListener("click", async () => {
 
 btnDeletePrompt.addEventListener("click", async () => deletePrompt(promptId));
 
-btnSaveEdits.addEventListener("click", async () => {});
+btnSaveEdits.addEventListener("click", async () => {
+  await sendData();
+});
 
 /* Resources: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_forms_through_JavaScript */
 /* SUBMITTING THE FORM DATA TO THE BACKEND */
@@ -59,16 +61,22 @@ btnSaveEdits.addEventListener("click", async () => {});
 async function sendData() {
   // Associate the FormData object with the form element
   const formData = new FormData(form);
+  const promptId = formData.get("promptId");
+
+  if (!promptId) {
+    log.textContent = "Load a prompt before saving edits.";
+    return;
+  }
 
   try {
     const response = await fetch("/api/mod_saveedits", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        promptId,
         use: formData.get("use"),
         prompt: formData.get("prompt"),
         contributor: formData.get("contributor"),
-        rating: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
       }),
     });
     const result = await response.json();
