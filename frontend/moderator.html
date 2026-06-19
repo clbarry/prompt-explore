@@ -62,38 +62,38 @@
               <p class="mb-0"></p>
               <p>
                 <span style="display: block"
-                  ><em><strong> Load Prompt</strong></em> will load a
-                  prompt from the recently_deleted collection for review.</span
+                  ><em><strong> Load Next Prompt</strong></em> will load the
+                  next prompt from the recently_deleted collection for
+                  review.</span
                 >
                 <span style="display: block"
                   ><em><strong> Delete Prompt</strong></em> will wipe this
                   prompt from the recently_deleted collection forever.</span
                 >
                 <span style="display: block"
-                  ><em><strong>Approve Edits </strong></em>will send the prompt back
-                  to the main collection, along with any edits you might have
-                  made.</span
+                  ><em><strong>Approve Edits </strong></em>will send the prompt
+                  back to the main collection, along with any edits you might
+                  have made.</span
                 >
                 <span style="display: block"
                   ><em><strong>Save Edits </strong></em>will save the prompt in
                   the recently_deleted collection for further action at a later
                   time.</span
                 >
-                <span style="display: block"
+                <!--<span style="display: block"
                   ><em><strong>Skip </strong></em>will skip the item and save it
                   in the recently_deleted collection for further action at a
                   later time.</span
-                >
+                >-->
               </p>
             </div>
 
             <br /><br /><br /><br /><br />
 
             <form id="moderatorForm">
-
-            <!--Prompt ID Added as hidden field to load prompts by ID-->
+              <!--Prompt ID Added as hidden field to load prompts by ID-->
               <input type="hidden" id="promptId" name="promptId" value="" />
-              
+
               <!--Use Field-->
               <div class="mb-3">
                 <h4>Edit Use</h4>
@@ -146,14 +146,13 @@
 
               <!--Action Buttons-->
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
                 <!--Fetch Prompt-->
                 <button
                   id="btn-LoadPrompt"
                   class="btn btn-primary me-md-2"
                   type="button"
                 >
-                  Load Prompt
+                  Load Next Prompt
                 </button>
 
                 <!--Delete Button-->
@@ -184,13 +183,9 @@
                 </button>
 
                 <!--Skip Button-->
-                <button
-                  id="btn-Skip"
-                  class="btn btn-primary"
-                  type="button"
-                >
+                <!--<button id="btn-Skip" class="btn btn-primary" type="button">
                   Skip
-                </button>
+                </button>-->
               </div>
             </form>
             <log id="moderatorLog" class="moderator-log log"></log>

@@ -11,18 +11,23 @@ const log = document.getElementById("moderatorLog");
 
 /* Event Listeners for Moderator Actions */
 
-
-async function loadPrompt(promptId) {
+async function loadPrompt(after) {
   try {
-    const query = promptId ? `?promptId=${encodeURIComponent(promptId)}` : "";
+    const query = after ? `?after=${encodeURIComponent(after)}` : "";
     const response = await fetch(`/api/recently-deleted${query}`);
     if (!response.ok) {
-      throw new Error(`Error fetching prompt: ${response.statusText}`);
+      const err = await response.json().catch(() => ({}));
+      /* Loads back to the first prompt if no more prompts are available */
+      if (response.status === 404 && after) {
+        form.elements["promptId"].value = "";
+      }
+      log.textContent = err.error || "No prompts in the review queue.";
+      return;
     }
     const prompt = await response.json();
 
-    const loadedPromptId = prompt?._id?.$oid || prompt?._id || "";
-    form.elements["promptId"].value = loadedPromptId;
+    const loadedId = prompt?._id?.$oid || prompt?._id?.toString() || prompt?._id || "";
+    form.elements["promptId"].value = loadedId;
 
     // Populate form fields with prompt data
     form.elements["use"].value = prompt.use || "";
@@ -31,28 +36,22 @@ async function loadPrompt(promptId) {
     log.textContent = "Prompt loaded successfully!";
   } catch (error) {
     console.error("Load prompt failed:", error);
-    log.textContent = "Failed to load prompt. Please try again.";
+    if (error.message.includes("404")) {
+      log.textContent = "No prompts in the review queue.";
+    } else {
+      log.textContent = "Failed to load prompt. Please try again.";
+    }
   }
 }
 
-btnLoadPrompt.addEventListener("click", async () => {  
-  const promptId = form.elements["promptId"].value;
-  await loadPrompt(promptId);
+btnLoadPrompt.addEventListener("click", async () => {
+  const currentId = form.elements["promptId"].value;
+  await loadPrompt(currentId);
 });
-
-
-
 
 btnDeletePrompt.addEventListener("click", async () => deletePrompt(promptId));
 
-
-
-
-btnSaveEdits.addEventListener("click", async () => {  
-});
-
-
-
+btnSaveEdits.addEventListener("click", async () => {});
 
 /* Resources: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_forms_through_JavaScript */
 /* SUBMITTING THE FORM DATA TO THE BACKEND */
@@ -64,12 +63,13 @@ async function sendData() {
   try {
     const response = await fetch("/api/mod_saveedits", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ 
-        use: formData.get("use"), 
-        prompt: formData.get("prompt"), 
-        contributor: formData.get("contributor"), 
-        rating: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 } }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        use: formData.get("use"),
+        prompt: formData.get("prompt"),
+        contributor: formData.get("contributor"),
+        rating: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      }),
     });
     const result = await response.json();
 
@@ -91,12 +91,5 @@ form.addEventListener("submit", (event) => {
   sendData();
 });
 
-btnApproveEdits.addEventListener("click", async () => {  
-});
+btnApproveEdits.addEventListener("click", async () => {});
 
-
-
-
-btnSkip.addEventListener("click", async () => {  
-});
-    

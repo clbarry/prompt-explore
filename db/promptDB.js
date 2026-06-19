@@ -129,11 +129,28 @@ function PromptExplorerDB() {
     }
   };
 
+  /* Load the first prompt from Recently Deleted */
   me.getFirstRecentlyDeleted = async () => {
     const { client } = connect();
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
     try {
       return await recentlyDeleted.findOne({}, { sort: { deletedAt: 1, _id: 1 } });
+    } catch (err) {
+      throw err;
+    } finally {
+      await client.close();
+    }
+  };
+  
+  /* Load the next prompt from Recently Deleted */
+  me.getNextRecentlyDeleted = async (afterId) => {
+    const { client } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      return await recentlyDeleted.findOne(
+        { _id: { $gt: new ObjectId(afterId) } },
+        { sort: { _id: 1 } }
+      );
     } catch (err) {
       throw err;
     } finally {
