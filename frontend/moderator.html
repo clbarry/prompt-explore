@@ -90,6 +90,10 @@
             <br /><br /><br /><br /><br />
 
             <form id="formModerator">
+
+            <!--Prompt ID Added as hidden field to load prompts by ID-->
+              <input type="hidden" id="promptId" name="promptId" value="" />
+              
               <!--Use Field-->
               <div class="mb-3">
                 <h4>Edit Use</h4>
@@ -101,6 +105,7 @@
                   type="text"
                   class="form-control"
                   id="useMod"
+                  name="use"
                   placeholder="Enter the primary use"
                 />
                 <br />
@@ -115,6 +120,7 @@
                 <textarea
                   class="form-control"
                   id="promptMod"
+                  name="prompt"
                   rows="5"
                   placeholder="Enter the prompt"
                 ></textarea>
@@ -132,6 +138,7 @@
                   type="text"
                   class="form-control"
                   id="contributorMod"
+                  name="contributor"
                   placeholder="Enter your contributor name"
                 />
                 <br />
@@ -160,9 +167,9 @@
 
                 <!--Approve Button-->
                 <button
-                  id="btn-ApprovePrompt"
+                  id="btn-ApproveEdits"
                   class="btn btn-primary me-md-2"
-                  type="button"
+                  type="button submit"
                 >
                   Approve Edits
                 </button>
@@ -178,7 +185,7 @@
 
                 <!--Skip Button-->
                 <button
-                  id="btn-SkipPrompt"
+                  id="btn-Skip"
                   class="btn btn-primary"
                   type="button"
                 >
