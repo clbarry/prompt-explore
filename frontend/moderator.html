@@ -74,96 +74,104 @@
             </p>
             <br /><br /><br /><br /><br />
 
-            <!--Use Field-->
-            <div class="mb-3">
-              <h4>Edit Use</h4>
-              <label for="editUseInput" class="form-label">
-                Using a up to 4 word description, what is the primary use for
-                the prompt.
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="useInput"
-                placeholder="Enter the primary use"
-              />
-              <br />
-            </div>
+            <form id="formModerator">
+              <!--Use Field-->
+              <div class="mb-3">
+                <h4>Edit Use</h4>
+                <label for="useMod" class="form-label">
+                  Using a up to 4 word description, what is the primary use for
+                  the prompt.
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="useMod"
+                  placeholder="Enter the primary use"
+                />
+                <br />
+              </div>
 
-            <!--Prompt Field-->
-            <div class="mb-3">
-              <h4>Edit Prompt</h4>
-              <label for="editPromptInput" class="form-label">
-                Edit the prompt you want to share with the community.
-              </label>
-              <textarea
-                class="form-control"
-                id="promptInput"
-                rows="5"
-                placeholder="Enter the prompt"
-              ></textarea>
-              <br />
-            </div>
+              <!--Prompt Field-->
+              <div class="mb-3">
+                <h4>Edit Prompt</h4>
+                <label for="editPromptInput" class="form-label">
+                  Edit the prompt you want to share with the community.
+                </label>
+                <textarea
+                  class="form-control"
+                  id="promptMod"
+                  rows="5"
+                  placeholder="Enter the prompt"
+                ></textarea>
+                <br />
+              </div>
 
-            <!--Contributor Name Field-->
-            <div class="mb-3">
-              <h4>Edit Contributor</h4>
-              <label for="editNameInput" class="form-label">
-                Edit the contributor name as you would like it to appear for
-                others to see.
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="nameInput"
-                placeholder="Enter your contributor name"
-              />
-              <br />
-            </div>
+              <!--Contributor Name Field-->
+              <div class="mb-3">
+                <h4>Edit Contributor</h4>
+                <label for="contributorMod" class="form-label">
+                  Edit the contributor name as you would like it to appear for
+                  others to see.
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contributorMod"
+                  placeholder="Enter your contributor name"
+                />
+                <br />
+              </div>
 
-            <!--Action Buttons-->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <!--Fetch Deleted Prompt-->
-              <button
-                id="btn-LoadDeletedPrompt"
-                class="btn btn-primary me-md-2"
-                type="button"
-              >
-                Load Deleted Prompt
-              </button>
+              <!--Action Buttons-->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <!--Fetch Deleted Prompt-->
+                <button
+                  id="btn-LoadDeletedPrompt"
+                  class="btn btn-primary me-md-2"
+                  type="button"
+                >
+                  Load Deleted Prompt
+                </button>
 
-              <!--Delete Button-->
-              <button
-                id="btn-DeletePrompt"
-                class="btn btn-primary me-md-2"
-                type="button"
-              >
-                Delete Prompt
-              </button>
+                <!--Delete Button-->
+                <button
+                  id="btn-DeletePrompt"
+                  class="btn btn-primary me-md-2"
+                  type="button"
+                >
+                  Delete Prompt
+                </button>
 
-              <!--Approve Button-->
-              <button
-                id="btn-ApprovePrompt"
-                class="btn btn-primary me-md-2"
-                type="button"
-              >
-                Approve
-              </button>
+                <!--Approve Button-->
+                <button
+                  id="btn-ApprovePrompt"
+                  class="btn btn-primary me-md-2"
+                  type="button"
+                >
+                  Approve
+                </button>
 
-              <!--Save Edits Button-->
-              <button
-                id="btn-SaveEdits"
-                class="btn btn-primary me-md-2"
-                type="button"
-              >
-                Save Edits
-              </button>
+                <!--Save Edits Button-->
+                <button
+                  id="btn-SaveEdits"
+                  class="btn btn-primary me-md-2"
+                  type="button"
+                >
+                  Save Edits
+                </button>
 
-              <!--Skip Button-->
-              <button id="btn-SkipPrompt" class="btn btn-primary" type="button">
-                Skip
-              </button>
-            </div>
+                <!--Skip Button-->
+                <button
+                  id="btn-SkipPrompt"
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Skip
+                </button>
+              </div>
+            </form>
+            <log id="moderatorLog" class="moderator-log log"></log>
+            <br /><br /><br /><br />
           </div>
         </div>
       </main>
