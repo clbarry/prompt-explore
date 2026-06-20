@@ -1,9 +1,7 @@
-
 /* This file is for JavaScript code related to the create.html page.*/
 
 /* MODAL CODE (BOOTSTRAP) */
 /* https://getbootstrap.com/docs/5.3/components/modal/ */
-
 
 /* DEFINE CONSTANTS */
 const clearBtn = document.getElementById("btn-ClearPrompt");
@@ -11,7 +9,7 @@ const form = document.getElementById("formCreatePrompt");
 const log = document.getElementById("log");
 
 /* CLEAR THE FORM */
-function logReset(event) {
+function logReset() {
   log.textContent = "Form reset!";
 }
 
@@ -31,12 +29,13 @@ async function sendData() {
   try {
     const response = await fetch("/api/create", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ 
-        use: formData.get("use"), 
-        prompt: formData.get("prompt"), 
-        contributor: formData.get("contributor"), 
-        rating: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 } }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        use: formData.get("use"),
+        prompt: formData.get("prompt"),
+        contributor: formData.get("contributor"),
+        rating: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      }),
     });
     const result = await response.json();
 
