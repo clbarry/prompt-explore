@@ -13,7 +13,7 @@ import createRouter from "./routes/create.js";
 /* MODERATOR PAGE */
 import modLoadRouter from "./routes/mod_load.js";
 import modDeleteRouter from "./routes/mod_delete.js";
-//import modApproveRouter from "./routes/mod_approve.js";
+import modApproveRouter from "./routes/mod_approve.js";
 import modSaveEditRouter from "./routes/mod_saveedit.js";
 
 
@@ -25,15 +25,18 @@ const PORT = process.env.PORT || 3300;
 app.use(express.json()); 
 app.use(express.static("frontend"));
 
+/* PROMPTS PAGE */
 app.use("/api", promptsRouter);
 app.use("/api", rateRouter);
 app.use("/api", deleteRouter);
 
+/* CREATE PAGE */
 app.use("/api", createRouter);
 
+/* MODERATOR PAGE */
 app.use("/api", modLoadRouter);
 app.use("/api", modDeleteRouter);
-//app.use("/api", modApproveRouter);
+app.use("/api", modApproveRouter);
 app.use("/api", modSaveEditRouter);
 
 
