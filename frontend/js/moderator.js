@@ -3,7 +3,6 @@ const btnLoadPrompt = document.getElementById("btn-LoadPrompt");
 const btnDeletePrompt = document.getElementById("btn-DeletePrompt");
 const btnSaveEdits = document.getElementById("btn-SaveEdits");
 const btnApproveEdits = document.getElementById("btn-ApproveEdits");
-const btnSkip = document.getElementById("btn-Skip");
 
 /* Define form and log elements */
 const form = document.getElementById("moderatorForm");
