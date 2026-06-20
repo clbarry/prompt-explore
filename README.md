@@ -31,7 +31,6 @@ Add screenshots or GIF demos in this section.
 
 ### Moderator Page (Hidden Page)
 ![Moderator Page Screenshot - top of Page](./frontend/public/pe_pg4a_moderator.png)
-
 ![Moderator Page Screenshot](./frontend/public/pe_pg4b_moderator.png)
 
 ## Project Structure Graphic
