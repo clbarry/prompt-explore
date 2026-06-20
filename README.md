@@ -2,6 +2,8 @@
 
 A full-stack web application for discovering, creating, rating, and moderating AI prompts.
 
+---
+
 ## Project Objective
 
 Prompt Explore is designed to provide a lightweight community space where users can:
@@ -13,9 +15,11 @@ Prompt Explore is designed to provide a lightweight community space where users 
 
 The goal is to combine practical frontend UX (HTML/CSS/JS pages) with backend API design (Node.js/Express) and persistent storage (MongoDB).
 
+---
+
 ## Screenshots / Demo
 
-Add screenshots or GIF demos in this section.
+Below are screenshots of each page of the website. 
 
 ### Home Page
 
@@ -32,6 +36,26 @@ Add screenshots or GIF demos in this section.
 ### Moderator Page (Hidden Page)
 ![Moderator Page Screenshot - top of Page](./frontend/public/pe_pg4a_moderator.png)
 ![Moderator Page Screenshot](./frontend/public/pe_pg4b_moderator.png)
+
+# Demo Video
+![Demo of Prompt Explore site](INSERT LINK)
+
+---
+
+## Design
+
+The visual design of this site was planned prior to development, covering layout, color palette, and typography decisions.
+
+📄 [View Design Document](./design/P2_Prompt Explore_Design_Personas.pdf)
+
+
+---
+
+### Presentation Slides
+
+![Presentation slides](INSERT LINK)
+
+---
 
 ## Project Structure Graphic
 
@@ -148,7 +172,7 @@ This project may include AI-assisted development.
 - All final code decisions, testing, and integration were reviewed by the project authors.
 - Any AI-generated content was validated and adapted to project requirements.
 
-- See AI Discolosure for details. 
+- See AI Discolosure for details (./AI Discolsure.md). 
 
 ## License
 
