@@ -160,7 +160,29 @@ function PromptExplorerDB() {
     }
   };
 
-    /* SAVE EDITS MODERATOR HTML */
+  /* APPROVE MODERATOR HTML */
+  /* Move a prompt from Recently Deleted back to Prompts Saving Edits */
+  me.approveRecentlyDeletedById = async (promptId) => {
+    const { client, prompts } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      const prompt = await recentlyDeleted.findOne({ _id: new ObjectId(promptId) });
+      if (!prompt) return { approved: false, reason: "not found" };
+
+      const { _id, deletedAt, ...promptToApprove } = prompt;
+
+      await prompts.insertOne(promptToApprove);
+
+      await recentlyDeleted.deleteOne({ _id: new ObjectId(promptId) });
+      return { approved: true };
+    } catch (err) {
+      throw err;
+    } finally {
+      await client.close();
+    }
+  };
+
+  /* SAVE EDITS MODERATOR HTML */
   /* Update a recently_deleted prompt by ID with new data */
   me.updateRecentlyDeletedById = async (promptId, updates) => {
     const { client } = connect();
