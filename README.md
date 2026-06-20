@@ -145,8 +145,8 @@ npm start
 
 ## Authors
 
-- [Julia Weppler](https://github.com/julia-weppler-1)  
-- [Carey Barry](https://github.com/clbarry)  
+- Julia Weppler [Github](https://github.com/julia-weppler-1) | [Julia's Homepage](https://julia-weppler-1.github.io/cs5610-project1-homepage/)  
+- Carey Barry [Github](https://github.com/clbarry) | [Carey's Homepage](https://careybarry.netlify.app/)
 
 ## Class Reference
 
