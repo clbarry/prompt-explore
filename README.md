@@ -38,16 +38,16 @@ Below are screenshots of each page of the website.
 ![Moderator Page Screenshot](./frontend/public/pe_pg4b_moderator.png)
 
 # Demo Video
-![Demo of Prompt Explore site](INSERT LINK)
+
+![Demo of Prompt Explore site](INSERT)
 
 ---
 
 ## Design
 
-The visual design of this site was planned prior to development, covering layout, color palette, and typography decisions.
+The visual design of this site was planned prior to development, covering layout, color palette, and typography decisions. The design document also includes user personas, division of work, and CRUD explination. 
 
-📄 [View Design Document](./design/P2_Prompt Explore_Design_Personas.pdf)
-
+[View Design Document](./design/P2_Prompt%20Explore_Design_Personas.pdf)
 
 ---
 
