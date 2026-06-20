@@ -39,7 +39,7 @@ Below are screenshots of each page of the website.
 
 # Demo Video
 
-![Demo of Prompt Explore site](INSERT)
+[Demo of Prompt Explore site](INSERT)
 
 ---
 
@@ -53,7 +53,7 @@ The visual design of this site was planned prior to development, covering layout
 
 ### Presentation Slides
 
-![Presentation slides](INSERT LINK)
+[Presentation slides](INSERT LINK)
 
 ---
 
