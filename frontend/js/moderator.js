@@ -10,7 +10,8 @@ const form = document.getElementById("moderatorForm");
 const log = document.getElementById("moderatorLog");
 
 /* Event Listeners for Moderator Actions */
-
+/* LOAD PROMPT MODERATOR PAGE */
+/* Load Prompt button will fetch the next prompt in the review queue */
 async function loadPrompt(after) {
   try {
     const query = after ? `?after=${encodeURIComponent(after)}` : "";
@@ -49,7 +50,37 @@ btnLoadPrompt.addEventListener("click", async () => {
   await loadPrompt(currentId);
 });
 
-btnDeletePrompt.addEventListener("click", async () => deletePrompt(promptId));
+/* DELETE PROMPT MODERATOR PAGE */
+async function deletePrompt(promptId) {
+  if (!promptId) {
+    log.textContent = "Load a prompt before attempting to delete.";
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/mod_delete", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ promptId }),
+    });
+    const result = await response.json();
+
+    if (response.ok) {
+      form.reset();
+      log.textContent = "Prompt deleted successfully!";
+    } else {
+      log.textContent = result.error || "Delete failed. Please try again.";
+    }
+  } catch (e) {
+    console.error(e);
+    log.textContent = "An error occurred. Please try again.";
+  }
+}
+
+btnDeletePrompt.addEventListener("click", async () => {
+  const promptId = form.elements["promptId"].value;
+  await deletePrompt(promptId);
+});
 
 btnSaveEdits.addEventListener("click", async () => {
   await sendData();

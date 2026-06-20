@@ -102,35 +102,6 @@ function PromptExplorerDB() {
 
   /* MODERATOR HTML */
 
-  /* SAVE EDITS MODERATOR HTML */
-  /* Update a prompt by ID with new data */
-  me.updatePromptById = async (promptId, updates) => {
-    const { client, prompts } = connect();
-    try {
-      return await prompts.updateOne(
-        { _id: new ObjectId(promptId) },
-        { $set: updates },
-      );
-    } finally {
-      await client.close();
-    }
-  };
-
-  /* SAVE EDITS MODERATOR HTML */
-  /* Update a recently_deleted prompt by ID with new data */
-  me.updateRecentlyDeletedById = async (promptId, updates) => {
-    const { client } = connect();
-    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
-    try {
-      return await recentlyDeleted.updateOne(
-        { _id: new ObjectId(promptId) },
-        { $set: updates },
-      );
-    } finally {
-      await client.close();
-    }
-  };
-
   /* LOAD MODERATOR HTML */
   /* Load a prompt by ID from Recently Deleted */
   me.getRecentlyDeletedById = async (promptId) => {
@@ -169,6 +140,36 @@ function PromptExplorerDB() {
       );
     } catch (err) {
       throw err;
+    } finally {
+      await client.close();
+    }
+  };
+
+  /* DELETE MODERATOR HTML */
+  /* Delete a prompt by ID from Recently Deleted */
+  me.deleteRecentlyDeletedById = async (promptId) => {
+    const { client } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      const result = await recentlyDeleted.deleteOne({ _id: new ObjectId(promptId) });
+      return { deleted: result.deletedCount === 1 };
+    } catch (err) {
+      throw err;
+    } finally {
+      await client.close();
+    }
+  };
+
+    /* SAVE EDITS MODERATOR HTML */
+  /* Update a recently_deleted prompt by ID with new data */
+  me.updateRecentlyDeletedById = async (promptId, updates) => {
+    const { client } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      return await recentlyDeleted.updateOne(
+        { _id: new ObjectId(promptId) },
+        { $set: updates },
+      );
     } finally {
       await client.close();
     }
