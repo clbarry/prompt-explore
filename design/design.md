@@ -1,4 +1,6 @@
 
+# Design Plan Narrative #
+
 # Description 
 Prompt explore is a web-based application that supports users looking to improve or expand their prompt engineering skills by exploring a database of existing user prompts and templates from a HuggingFace dataset. Users can also create and upload user prompts to quickly reference their favorite prompts when using applications such as Claude or ChatGPT.The following features will be available to users.
 
