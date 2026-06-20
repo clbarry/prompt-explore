@@ -47,7 +47,7 @@ Below are screenshots of each page of the website.
 
 The visual design of this site was planned prior to development, covering layout, color palette, and typography decisions. The design document also includes user personas, division of work, and CRUD explination. 
 
-[View Design Document](./design/P2_Prompt%20Explore_Design_Personas.pdf)
+[View Design Document](./design/P2_PromptExploreDesign.pdf)
 
 ---
 
