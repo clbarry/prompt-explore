@@ -1,0 +1,154 @@
+# Prompt Explore
+
+A full-stack web application for discovering, creating, rating, and moderating AI prompts.
+
+## Project Objective
+
+Prompt Explore is designed to provide a lightweight community space where users can:
+
+- Browse a collection of AI prompts
+- Create and submit new prompts
+- Rate prompts from the main prompts page
+- Moderate content with approve, delete, and edit workflows
+
+The goal is to combine practical frontend UX (HTML/CSS/JS pages) with backend API design (Node.js/Express) and persistent storage (MongoDB).
+
+## Screenshots / Demo
+
+Add screenshots or GIF demos in this section.
+
+### Home Page
+
+![Home Page GIF](./design/screenshots/home-page.gif)
+
+### Prompts Page
+
+![Prompts Page GIF](./design/screenshots/prompts-page.gif)
+
+### Create Page
+
+![Create Page GIF](./design/screenshots/create-page.gif)
+
+### Moderator Page
+
+![Moderator Page GIF](./design/screenshots/moderator-page.gif)
+
+## Project Structure Graphic
+
+```mermaid
+flowchart TD
+  A[prompt-explore/] --> B[backend.js]
+  A --> C[db/]
+  C --> C1[promptDB.js]
+  A --> D[routes/]
+  D --> D1[prompts.js]
+  D --> D2[create.js]
+  D --> D3[rate.js]
+  D --> D4[delete.js]
+  D --> D5[mod_load.js]
+  D --> D6[mod_delete.js]
+  D --> D7[mod_approve.js]
+  D --> D8[mod_saveedit.js]
+  A --> E[frontend/]
+  E --> E1[index.html]
+  E --> E2[prompts.html]
+  E --> E3[create.html]
+  E --> E4[moderator.html]
+  E --> E5[css/]
+  E --> E6[js/]
+  E --> E7[public/]
+  A --> F[design/]
+  A --> G[package.json]
+  A --> H[README.md]
+```
+
+## Tech Requirements
+
+### Core Stack
+
+- HTML5
+- CSS3
+- JavaScript (ES Modules)
+- Node.js
+- Express.js
+- MongoDB Atlas
+
+### Packages
+
+- express
+- mongodb
+- dotenv
+- nodemon (development)
+- eslint + prettier (linting/formatting)
+
+### Local Requirements
+
+- Node.js 18+ recommended
+- npm 9+ recommended
+- MongoDB Atlas credentials configured via environment variables:
+  - MONGOUSER
+  - MONGOPASS
+
+## Getting Started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create your environment variables (for example in `.env`):
+
+```env
+MONGOUSER=your_mongo_username
+MONGOPASS=your_mongo_password
+PORT=3300
+```
+
+3. Run in development mode:
+
+```bash
+npm run dev
+```
+
+4. Run in production mode:
+
+```bash
+npm start
+```
+
+## Authors
+
+- [Julia Weppler](https://github.com/)  
+  Homepage: Add personal homepage link
+- [Carey Barry](https://github.com/clbarry)  
+  Homepage: Add personal homepage link
+
+## Class Reference
+
+This project was developed in connection with the course:
+
+- [Web Development Online Summer 2026](https://johnguerra.co/classes/webDevelopment_online_summer_2026/)
+
+## Deployment
+
+This project is deployed on Render.
+
+Deployment note:
+
+- Configure `MONGOUSER`, `MONGOPASS`, and `PORT` in the Render service environment variables.
+- Use the start command `npm start` (which runs `node backend.js`).
+
+## AI Disclosure
+
+This project may include AI-assisted development.
+
+Suggested disclosure text (edit as needed):
+
+- AI tools were used for brainstorming, code review support, and documentation drafting.
+- All final code decisions, testing, and integration were reviewed by the project authors.
+- Any AI-generated content was validated and adapted to project requirements.
+
+## License
+
+Licensed under the MIT License. See `LICENSE` for details.
