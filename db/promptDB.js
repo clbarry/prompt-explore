@@ -7,8 +7,13 @@ function PromptExplorerDB() {
 
   const USER = process.env.MONGOUSER;
   const PASS = process.env.MONGOPASS;
-  console.log("USER:", process.env.MONGOUSER, "PASS set?", !!process.env.MONGOPASS);
-  const URI = `mongodb+srv://${USER}:${PASS}@prompt-explore-cluster.bu1xeuj.mongodb.net/?appName=prompt-explore-cluster`;
+  if (!USER || !PASS) {
+    throw new Error("Missing MONGOUSER or MONGOPASS environment variable");
+  }
+
+  const encodedUser = encodeURIComponent(USER);
+  const encodedPass = encodeURIComponent(PASS);
+  const URI = `mongodb+srv://${encodedUser}:${encodedPass}@prompt-explore-cluster.bu1xeuj.mongodb.net/?appName=prompt-explore-cluster`;
   // const URI = "mongodb://localhost:27017";
   const DB_NAME = "promptexplore";
   const COLLECTION = "prompts";
