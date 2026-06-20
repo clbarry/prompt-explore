@@ -10,6 +10,7 @@ const form = document.getElementById("moderatorForm");
 const log = document.getElementById("moderatorLog");
 
 /* Event Listeners for Moderator Actions */
+
 /* LOAD PROMPT MODERATOR PAGE */
 /* Load Prompt button will fetch the next prompt in the review queue */
 async function loadPrompt(after) {
@@ -113,14 +114,38 @@ async function sendData() {
     const result = await response.json();
 
     if (response.ok) {
-      form.reset();
       log.textContent = "Prompt edits submitted successfully!";
+      return true;
     } else {
       log.textContent = result.error || "Submit failed. Please try again.";
+      return false;
     }
   } catch (e) {
     console.error(e);
     log.textContent = "An error occurred. Please try again.";
+    return false;
+  }
+}
+
+async function approvePrompt(promptId) {
+  try {
+    const response = await fetch("/api/mod_approve", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ promptId }),
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      log.textContent = result.error || "Approve failed. Please try again.";
+      return false;
+    }
+
+    return true;
+  } catch (e) {
+    console.error(e);
+    log.textContent = "An error occurred. Please try again.";
+    return false;
   }
 }
 
@@ -130,5 +155,21 @@ form.addEventListener("submit", (event) => {
   sendData();
 });
 
-btnApproveEdits.addEventListener("click", async () => {});
+btnApproveEdits.addEventListener("click", async () => {
+  const promptId = form.elements["promptId"].value;
+
+  if (!promptId) {
+    log.textContent = "Load a prompt before approving edits.";
+    return;
+  }
+
+  const saved = await sendData();
+  if (!saved) return;
+
+  const approved = await approvePrompt(promptId);
+  if (!approved) return;
+
+  form.reset();
+  log.textContent = "Prompt edits approved and moved back to prompts.";
+});
 
