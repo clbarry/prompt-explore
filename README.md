@@ -19,19 +19,20 @@ Add screenshots or GIF demos in this section.
 
 ### Home Page
 
-![Home Page GIF](./design/screenshots/home-page.gif)
+![Home Page Screenshot](./frontend/public/pe_pg1_home.png)
 
 ### Prompts Page
 
-![Prompts Page GIF](./design/screenshots/prompts-page.gif)
+![Prompts Page Screenshot](./frontend/public/pe_pg2_prompts.png)
 
 ### Create Page
 
-![Create Page GIF](./design/screenshots/create-page.gif)
+![Create Page Screenshot](./frontend/public/pe_pg3_create.png)
 
-### Moderator Page
+### Moderator Page (Hidden Page)
+![Moderator Page Screenshot - top of Page](./frontend/public/pe_pg4a_moderator.png)
 
-![Moderator Page GIF](./design/screenshots/moderator-page.gif)
+![Moderator Page Screenshot](./frontend/public/pe_pg4b_moderator.png)
 
 ## Project Structure Graphic
 
