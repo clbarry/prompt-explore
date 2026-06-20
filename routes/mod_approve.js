@@ -4,15 +4,25 @@ import promptDB from "../db/promptDB.js";
 const router = express.Router();
 
 router.post("/mod_approve", async (req, res) => {
-	const { promptId } = req.body;
+	const { promptId, use, prompt, contributor } = req.body;
 
-	if (!promptId) {
-		return res.status(400).json({ error: "Missing promptId" });
+	if (!promptId || !use || !prompt || !contributor) {
+		return res.status(400).json({ error: "Missing required fields" });
 	}
 
 	try {
-		const result = await promptDB.approveRecentlyDeletedById(promptId);
-		if (!result.approved) {
+		const saveResult = await promptDB.updateRecentlyDeletedById(promptId, {
+			use,
+			prompt,
+			contributor,
+		});
+
+		if (saveResult.matchedCount === 0) {
+			return res.status(404).json({ error: "Prompt not found" });
+		}
+
+		const approveResult = await promptDB.approveRecentlyDeletedById(promptId);
+		if (!approveResult.approved) {
 			return res.status(404).json({ error: "Prompt not found" });
 		}
 

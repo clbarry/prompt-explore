@@ -127,12 +127,25 @@ async function sendData() {
   }
 }
 
-async function approvePrompt(promptId) {
+async function approvePrompt() {
+  const formData = new FormData(form);
+  const promptId = formData.get("promptId");
+
+  if (!promptId) {
+    log.textContent = "Load a prompt before approving edits.";
+    return false;
+  }
+
   try {
     const response = await fetch("/api/mod_approve", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ promptId }),
+      body: JSON.stringify({
+        promptId,
+        use: formData.get("use"),
+        prompt: formData.get("prompt"),
+        contributor: formData.get("contributor"),
+      }),
     });
     const result = await response.json();
 
@@ -163,10 +176,7 @@ btnApproveEdits.addEventListener("click", async () => {
     return;
   }
 
-  const saved = await sendData();
-  if (!saved) return;
-
-  const approved = await approvePrompt(promptId);
+  const approved = await approvePrompt();
   if (!approved) return;
 
   form.reset();
