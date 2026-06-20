@@ -120,10 +120,8 @@ npm start
 
 ## Authors
 
-- [Julia Weppler](https://github.com/)  
-  Homepage: Add personal homepage link
+- [Julia Weppler](https://github.com/julia-weppler-1)  
 - [Carey Barry](https://github.com/clbarry)  
-  Homepage: Add personal homepage link
 
 ## Class Reference
 
@@ -135,6 +133,8 @@ This project was developed in connection with the course:
 
 This project is deployed on Render.
 
+(https://prompt-explore.onrender.com/)
+
 Deployment note:
 
 - Configure `MONGOUSER`, `MONGOPASS`, and `PORT` in the Render service environment variables.
@@ -143,12 +143,11 @@ Deployment note:
 ## AI Disclosure
 
 This project may include AI-assisted development.
-
-Suggested disclosure text (edit as needed):
-
 - AI tools were used for brainstorming, code review support, and documentation drafting.
 - All final code decisions, testing, and integration were reviewed by the project authors.
 - Any AI-generated content was validated and adapted to project requirements.
+
+- See AI Discolosure for details. 
 
 ## License
 
