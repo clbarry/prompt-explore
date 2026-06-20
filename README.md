@@ -132,7 +132,9 @@ This project was developed in connection with the course:
 
 This project is deployed on Render.
 
-(https://prompt-explore.onrender.com/)
+Link: (https://prompt-explore.onrender.com/)
+
+Hidden Moderator Page Link: (https://prompt-explore.onrender.com/moderator.html)
 
 Deployment note:
 
