@@ -172,7 +172,7 @@ This project may include AI-assisted development.
 - All final code decisions, testing, and integration were reviewed by the project authors.
 - Any AI-generated content was validated and adapted to project requirements.
 
-- See AI Discolosure for details (./AI Discolsure.md). 
+- See AI Discolosure log for details (./AI Discolsure.md). 
 
 ## License
 
