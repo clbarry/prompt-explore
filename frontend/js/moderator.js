@@ -27,7 +27,8 @@ async function loadPrompt(after) {
     }
     const prompt = await response.json();
 
-    const loadedId = prompt?._id?.$oid || prompt?._id?.toString() || prompt?._id || "";
+    const loadedId =
+      prompt?._id?.$oid || prompt?._id?.toString() || prompt?._id || "";
     form.elements["promptId"].value = loadedId;
 
     // Populate form fields with prompt data
@@ -181,4 +182,3 @@ btnApproveEdits.addEventListener("click", async () => {
   form.reset();
   log.textContent = "Prompt edits approved and moved back to prompts.";
 });
-

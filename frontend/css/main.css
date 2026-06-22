@@ -6,7 +6,7 @@ body {
   display: flex;
   flex-direction: column;
 }
- 
+
 .hero {
   flex: 1;
   display: flex;
@@ -14,21 +14,21 @@ body {
   justify-content: center;
   position: relative;
   min-height: 100vh;
-  background-image: url('../public/background.jpeg');
+  background-image: url("../public/background.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-color: #010615;
 }
- 
+
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.55);
   z-index: 1;
 }
- 
+
 .site-header {
   position: absolute;
   top: 0;
@@ -37,19 +37,19 @@ body {
   z-index: 10;
   padding: 1.75rem 0;
 }
- 
+
 .nav-bar {
   display: flex;
   justify-content: flex-end;
 }
- 
+
 .nav-links {
   list-style: none;
   display: flex;
   gap: 2.5rem;
   padding-right: 3rem;
 }
- 
+
 .nav-links .nav-link {
   font-family: Georgia, serif;
   font-size: 1.05rem;
@@ -60,16 +60,16 @@ body {
   padding: 0;
   transition: color 0.2s ease;
 }
- 
+
 .nav-links .nav-link:hover {
   color: #ffffff;
 }
- 
+
 .nav-links .nav-link.active {
   color: #ffffff;
   font-weight: 700;
 }
- 
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -77,7 +77,7 @@ body {
   padding: 2rem 1.5rem;
   text-align: center;
 }
- 
+
 .hero-title {
   font-family: Georgia, serif;
   font-size: 5rem;
@@ -86,7 +86,7 @@ body {
   line-height: 1.05;
   margin-bottom: 1.5rem;
 }
- 
+
 .hero-body {
   font-family: Georgia, serif;
   font-size: 1.05rem;
@@ -94,7 +94,7 @@ body {
   line-height: 1.75;
   margin-bottom: 2.25rem;
 }
- 
+
 .btn-get-started {
   display: inline-block;
   font-family: Georgia, serif;
@@ -107,16 +107,16 @@ body {
   padding: 0.75rem 2.25rem;
   text-decoration: none;
 }
- 
+
 @media (max-width: 576px) {
   .nav-links {
     gap: 1.5rem;
     padding-right: 1.5rem;
   }
-    .hero-title {
+  .hero-title {
     font-size: 3rem;
   }
- 
+
   .hero-body {
     font-size: 0.95rem;
   }

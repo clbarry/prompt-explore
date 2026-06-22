@@ -4,7 +4,6 @@ import "dotenv/config";
 function PromptExplorerDB() {
   const me = {};
 
-
   const USER = process.env.MONGOUSER;
   const PASS = process.env.MONGOPASS;
   if (!USER || !PASS) {
@@ -93,7 +92,6 @@ function PromptExplorerDB() {
     }
   };
 
-
   /* CREATE HTML */
   /* create a new prompt */
   me.createPrompt = async (record) => {
@@ -126,7 +124,10 @@ function PromptExplorerDB() {
     const { client } = connect();
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
     try {
-      return await recentlyDeleted.findOne({}, { sort: { deletedAt: 1, _id: 1 } });
+      return await recentlyDeleted.findOne(
+        {},
+        { sort: { deletedAt: 1, _id: 1 } },
+      );
     } catch (err) {
       throw err;
     } finally {
@@ -141,7 +142,7 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         { _id: { $gt: new ObjectId(afterId) } },
-        { sort: { _id: 1 } }
+        { sort: { _id: 1 } },
       );
     } catch (err) {
       throw err;
@@ -156,7 +157,9 @@ function PromptExplorerDB() {
     const { client } = connect();
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
     try {
-      const result = await recentlyDeleted.deleteOne({ _id: new ObjectId(promptId) });
+      const result = await recentlyDeleted.deleteOne({
+        _id: new ObjectId(promptId),
+      });
       return { deleted: result.deletedCount === 1 };
     } catch (err) {
       throw err;
@@ -171,7 +174,9 @@ function PromptExplorerDB() {
     const { client, prompts } = connect();
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
     try {
-      const prompt = await recentlyDeleted.findOne({ _id: new ObjectId(promptId) });
+      const prompt = await recentlyDeleted.findOne({
+        _id: new ObjectId(promptId),
+      });
       if (!prompt) return { approved: false, reason: "not found" };
 
       const { _id, deletedAt, ...promptToApprove } = prompt;

@@ -13,7 +13,12 @@ router.post("/create", async (req, res) => {
   }
 
   try {
-    const result = await promptDB.createPrompt({ use, prompt, contributor, rating });
+    const result = await promptDB.createPrompt({
+      use,
+      prompt,
+      contributor,
+      rating,
+    });
     res.status(201).json({ success: true, id: result.insertedId });
   } catch (error) {
     console.error("Create failed:", error);

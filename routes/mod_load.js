@@ -20,7 +20,9 @@ router.get("/recently-deleted", async (req, res) => {
     }
 
     if (!prompt) {
-      return res.status(404).json({ error: "No more prompts in the review queue." });
+      return res
+        .status(404)
+        .json({ error: "No more prompts in the review queue." });
     }
     res.json(prompt);
   } catch (error) {

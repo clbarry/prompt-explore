@@ -36,35 +36,34 @@
         <!--Container create-prompt-container-->
         <div class="container create-prompt-container">
           <div class="row">
-            <br><br>
+            <br /><br />
             <h2 class="page-title"></h2>
-            <br><br>
+            <br /><br />
 
             <h3>Create a prompt to share with the community.</h3>
             <p>
               Using the form below add a promt that has worked well for you and
               share with the community.
             </p>
-            <br><br><br>
+            <br /><br /><br />
 
             <form id="formCreatePrompt">
-
-            <!--Use Field-->
-            <div class="mb-3">
-              <h4>Use</h4>
-              <label for="use" class="form-label">
-                Using a up to 4 word description, what is the primary use for
-                the prompt.
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="use"
-                name="use"
-                placeholder="Enter the primary use"
-              />
-              <br>
-            </div>
+              <!--Use Field-->
+              <div class="mb-3">
+                <h4>Use</h4>
+                <label for="use" class="form-label">
+                  Using a up to 4 word description, what is the primary use for
+                  the prompt.
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="use"
+                  name="use"
+                  placeholder="Enter the primary use"
+                />
+                <br />
+              </div>
 
               <!--Prompt Field-->
               <div class="mb-3">
@@ -79,7 +78,7 @@
                   rows="5"
                   placeholder="Enter the prompt"
                 ></textarea>
-                <br>
+                <br />
               </div>
 
               <!--Contributor Name Field-->
@@ -96,7 +95,7 @@
                   name="contributor"
                   placeholder="Enter your contributor name"
                 />
-                <br>
+                <br />
               </div>
 
               <!--Submit Button-->
@@ -120,52 +119,55 @@
                 </button>
               </div>
 
-            <!-- Modal -->
-            <div
-              class="modal fade"
-              id="staticBackdrop"
-              data-bs-backdrop="static"
-              data-bs-keyboard="false"
-              tabindex="-1"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title fs-5" id="staticBackdropLabel">
-                      Confirm your prompt submission.  
-                    </h5>
-                    <button
-                      type="button"
-                      class="btn btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">Ready to submit your prompt? Select Submit to confirm or Edit to revise.</div>
-                  <div class="modal-footer">
-                    <button
-                      id="btn-ModalSubmit"
-                      type="button"
-                      class="btn btn-secondary"
-                    >
-                      Submit
-                    </button>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title fs-5" id="staticBackdropLabel">
+                        Confirm your prompt submission.
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      Ready to submit your prompt? Select Submit to confirm or
+                      Edit to revise.
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        id="btn-ModalSubmit"
+                        type="button"
+                        class="btn btn-secondary"
+                      >
+                        Submit
+                      </button>
 
-                    <button
-                      data-bs-dismiss="modal"
-                      type="button"
-                      class="btn btn-primary"
-                    >
-                      Edit
-                    </button>
+                      <button
+                        data-bs-dismiss="modal"
+                        type="button"
+                        class="btn btn-primary"
+                      >
+                        Edit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </form>
             <p id="log"></p>
-            </div>
           </div>
+        </div>
       </main>
 
       <!--Footer-->

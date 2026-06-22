@@ -10,7 +10,9 @@ const modalSubmitBtn = document.getElementById("btn-ModalSubmit");
 const form = document.getElementById("formCreatePrompt");
 const log = document.getElementById("log");
 const modalEl = document.getElementById("staticBackdrop");
-const submitModal = modalEl ? bootstrap.Modal.getOrCreateInstance(modalEl) : null;
+const submitModal = modalEl
+  ? bootstrap.Modal.getOrCreateInstance(modalEl)
+  : null;
 
 /* CLEAR THE FORM */
 function logReset() {
