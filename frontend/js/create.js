@@ -5,8 +5,12 @@
 
 /* DEFINE CONSTANTS */
 const clearBtn = document.getElementById("btn-ClearPrompt");
+const submitBtn = document.getElementById("btn-SubmitPrompt");
+const modalSubmitBtn = document.getElementById("btn-ModalSubmit");
 const form = document.getElementById("formCreatePrompt");
 const log = document.getElementById("log");
+const modalEl = document.getElementById("staticBackdrop");
+const submitModal = modalEl ? bootstrap.Modal.getOrCreateInstance(modalEl) : null;
 
 /* CLEAR THE FORM */
 function logReset() {
@@ -54,5 +58,14 @@ async function sendData() {
 // Take over form submission
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  submitModal?.show();
+});
+
+modalSubmitBtn.addEventListener("click", () => {
+  submitModal?.hide();
   sendData();
+});
+
+submitBtn.addEventListener("click", () => {
+  log.textContent = "";
 });
