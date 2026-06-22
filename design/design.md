@@ -11,10 +11,14 @@ Prompt explore is a web-based application that supports users looking to improve
 ### prompts (main) collection:
 Create: Users can create new prompts to add to the current prompt dataset. (Create Page)
 Read: Users can explore the database of prompts by searching or filtering by rating and/or usefulness category. (RED Page)
-Update: Users can update the prompt rating, which indicates the quality of the prompt. (RED Page)Delete: Users can delete a prompt from the dataset if it has an average rating below 3 stars out of 5, or if it contains offensive content. (RED Page)
+Update: Users can update the prompt rating, which indicates the quality of the prompt. (RED Page)
+Delete: Users can delete a prompt from the dataset if it has an average rating below 3 stars out of 5, or if it contains offensive content. This simulataneously performs a Create operation of the prompt to the `recently_deleted` collection (RED Page)
 
 ### recently_deleted collection
-Create: Moderator will create a new record in the main 'prompts' collection when they click 'Approve'. (moderator hidden page)Read: Moderator can iterate through the database as the page is populated with a single record's details. (moderator hidden page)Update: Moderator can update the prompts deleted by users and save edits for later, potentially to be reviewed by another moderator. (moderator hidden page)Delete: Moderator can decide to permanently delete a prompt from the recently_deleted collection. (moderator hidden page)
+Create: Moderator will create a new record in the main `prompts` collection when they click 'Approve', which simultaneously performs a Delete on `recently_deleted`. (moderator hidden page)
+Read: Moderator can iterate through the database as the page is populated with a single record's details. (moderator hidden page)
+Update: Moderator can update the prompts deleted by users and save edits for later, potentially to be reviewed by another moderator. (moderator hidden page)
+Delete: Moderator can decide to permanently delete a prompt from the recently_deleted collection. (moderator hidden page)
 
 ---
 
@@ -57,13 +61,13 @@ Needs: A way to search the database and find user prompts related to job searchi
 Home page. Users are welcomed to the site and informed about the purpose. 
 
 ### Page2: Prompts ###
-Prompts [Read, Edit, Delete (RED)] Page. Edit – Users can edit the rating of a prompt by selecting their own star rating. This will contribute to the average rating of a promptRead – When a user visits the site, the client will request a stream of the first 50 entries of prompts from the database. Users will be able to create new requests by modifying filters and sorting (Show All, sort by rating, show all for filtered usefulness categories, etc).Delete – If an entry contains inappropriate content or is rated an average < 3 stars with at least 5 reviews, users can delete the prompt record from the database.
+Prompts [Read, Edit, Delete (RED)] Page. **Edit** – Users can edit the rating of a prompt by selecting their own star rating. This will contribute to the average rating of a prompt. **Read** – When a user visits the site, the client will request a stream of the first 50 entries of prompts from the database. Users will be able to create new requests by modifying filters and sorting (Show All, sort by rating, show all for filtered usefulness categories, etc). **Delete** – If an entry contains inappropriate content or is rated an average < 3 stars with at least 5 reviews, users can delete the prompt record from the database. **Create** – When a prompt is deleted by a user, the application also _performs a create operation on the same record to the recently_deleted collection as a separate request._
 
 ### Page 3: Create ### 
-Create Page. Uploading a new response, the user would type in the prompt, select add from the list of usefulness categories. HTML, CSS, JS from (submit button connected to NodeJS) on submit, collect text information, and Express app will submit this new record to the Prompt MongoDB.
+Create Page. **Create** – Uploading a new response, the user would type in the prompt, select add from the list of usefulness categories. HTML, CSS, JS from (submit button connected to NodeJS) on submit, collect text information, and Express app will submit this new record to the Prompt MongoDB.
 
 ### Page 4: Moderator ###
-Moderator Page. Moderator is able to load/read, edit, delete, or approve the prompts marked for deletion. (see recently_deleted CRUD description above). 
+Moderator Page. Moderator is able to load/read, edit, delete, or approve (create to the `prompts` collection) the prompts marked for deletion. (see recently_deleted CRUD description above). 
 
 ### Julia 
 Julia will be responsible for the Read, Edit, Delete (RED) page full stack (HTML + ES6 modules + Express Routes).
