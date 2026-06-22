@@ -9,16 +9,16 @@ Prompt explore is a web-based application that supports users looking to improve
 # Database Collections 
 
 ### prompts (main) collection:
-Create: Users can create new prompts to add to the current prompt dataset. (Create Page)
-Read: Users can explore the database of prompts by searching or filtering by rating and/or usefulness category. (RED Page)
-Update: Users can update the prompt rating, which indicates the quality of the prompt. (RED Page)
-Delete: Users can delete a prompt from the dataset if it has an average rating below 3 stars out of 5, or if it contains offensive content. This simulataneously performs a Create operation of the prompt to the `recently_deleted` collection (RED Page)
+**Create**: Users can create new prompts to add to the current prompt dataset. (Create Page)
+**Read**: Users can explore the database of prompts by searching or filtering by rating and/or usefulness category. (RED Page)
+**Update**: Users can update the prompt rating, which indicates the quality of the prompt. (RED Page)
+**Delete**: Users can delete a prompt from the dataset if it has an average rating below 3 stars out of 5, or if it contains offensive content. This simulataneously performs a Create operation of the prompt to the `recently_deleted` collection using a separate request (RED Page)
 
 ### recently_deleted collection
-Create: Moderator will create a new record in the main `prompts` collection when they click 'Approve', which simultaneously performs a Delete on `recently_deleted`. (moderator hidden page)
-Read: Moderator can iterate through the database as the page is populated with a single record's details. (moderator hidden page)
-Update: Moderator can update the prompts deleted by users and save edits for later, potentially to be reviewed by another moderator. (moderator hidden page)
-Delete: Moderator can decide to permanently delete a prompt from the recently_deleted collection. (moderator hidden page)
+**Create**: Moderator will create a new record in the main `prompts` collection when they click 'Approve', which simultaneously performs a Delete on `recently_deleted`. (moderator hidden page)
+**Read**: Moderator can iterate through the database as the page is populated with a single record's details. (moderator hidden page)
+**Update**: Moderator can update the prompts deleted by users and save edits for later, potentially to be reviewed by another moderator. (moderator hidden page)
+**Delete**: Moderator can decide to permanently delete a prompt from the recently_deleted collection. (moderator hidden page)
 
 ---
 
