@@ -21,19 +21,19 @@ The goal is to combine practical frontend UX (HTML/CSS/JS pages) with backend AP
 
 Below are screenshots of each page of the website.
 
-### Home Page
+### [Home Page](https://prompt-explore.onrender.com/)
 
 ![Home Page Screenshot](./frontend/public/pe_pg1_home.png)
 
-### Prompts Page
+### [Prompts Page](https://prompt-explore.onrender.com/prompts.html)
 
 ![Prompts Page Screenshot](./frontend/public/pe_pg2_prompts.png)
 
-### Create Page
+### [Create Page](https://prompt-explore.onrender.com/create.html)
 
 ![Create Page Screenshot](./frontend/public/pe_pg3_create.png)
 
-### Moderator Page (Hidden Page)
+### [Moderator Page (Hidden Page)](https://prompt-explore.onrender.com/moderator.html)
 
 ![Moderator Page Screenshot - top of Page](./frontend/public/pe_pg4a_moderator.png)
 ![Moderator Page Screenshot](./frontend/public/pe_pg4b_moderator.png)
