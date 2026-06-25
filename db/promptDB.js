@@ -4,27 +4,26 @@ import "dotenv/config";
 function PromptExplorerDB() {
   const me = {};
 
-  const USER = process.env.MONGOUSER;
-  const PASS = process.env.MONGOPASS;
-  if (!USER || !PASS) {
-    throw new Error("Missing MONGOUSER or MONGOPASS environment variable");
+  const URI = process.env.MONGODB_URI;
+  if (!URI) {
+    throw new Error("Missing MONGODB_URI environment variable");
   }
 
-  const encodedUser = encodeURIComponent(USER);
-  const encodedPass = encodeURIComponent(PASS);
-  const URI = `mongodb+srv://${encodedUser}:${encodedPass}@prompt-explore-cluster.bu1xeuj.mongodb.net/?appName=prompt-explore-cluster`;
-  // const URI = "mongodb://localhost:27017";
   const DB_NAME = "promptexplore";
   const COLLECTION = "prompts";
   const RECENTLY_DELETED = "recently_deleted";
   const connect = () => {
-    const client = new MongoClient(URI, {
-      serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-      },
-    });
+    const clientOptions = URI.startsWith("mongodb+srv:")
+      ? {
+          serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+          },
+        }
+      : {};
+
+    const client = new MongoClient(URI, clientOptions);
     const prompts = client.db(DB_NAME).collection(COLLECTION);
     return { client, prompts };
   };
