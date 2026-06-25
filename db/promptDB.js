@@ -46,7 +46,7 @@ function PromptExplorerDB() {
     try {
       const result = await prompts.updateOne(
         { _id: new ObjectId(promptId) },
-        { $inc: { [`rating.${rating}`]: 1 } },
+        { $inc: { [`rating.${rating}`]: 1 } }
       );
       return result;
     } finally {
@@ -115,7 +115,7 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         {},
-        { sort: { deletedAt: 1, _id: 1 } },
+        { sort: { deletedAt: 1, _id: 1 } }
       );
     } finally {
       await client.close();
@@ -129,7 +129,7 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         { _id: { $gt: new ObjectId(afterId) } },
-        { sort: { _id: 1 } },
+        { sort: { _id: 1 } }
       );
     } finally {
       await client.close();
@@ -183,7 +183,7 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.updateOne(
         { _id: new ObjectId(promptId) },
-        { $set: updates },
+        { $set: updates }
       );
     } finally {
       await client.close();

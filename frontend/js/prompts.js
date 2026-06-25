@@ -248,7 +248,7 @@ function buildPromptRow(prompt) {
   submitBtn.className = "submit-rating-btn";
   submitBtn.textContent = "Submit rating";
   submitBtn.addEventListener("click", () =>
-    submitRating(prompt._id, ratingState),
+    submitRating(prompt._id, ratingState)
   );
 
   const deleteBtn = document.createElement("button");
