@@ -4,27 +4,26 @@ import "dotenv/config";
 function PromptExplorerDB() {
   const me = {};
 
-  const USER = process.env.MONGOUSER;
-  const PASS = process.env.MONGOPASS;
-  if (!USER || !PASS) {
-    throw new Error("Missing MONGOUSER or MONGOPASS environment variable");
+  const URI = process.env.MONGODB_URI;
+  if (!URI) {
+    throw new Error("Missing MONGODB_URI environment variable");
   }
 
-  const encodedUser = encodeURIComponent(USER);
-  const encodedPass = encodeURIComponent(PASS);
-  const URI = `mongodb+srv://${encodedUser}:${encodedPass}@prompt-explore-cluster.bu1xeuj.mongodb.net/?appName=prompt-explore-cluster`;
-  // const URI = "mongodb://localhost:27017";
   const DB_NAME = "promptexplore";
   const COLLECTION = "prompts";
   const RECENTLY_DELETED = "recently_deleted";
   const connect = () => {
-    const client = new MongoClient(URI, {
-      serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-      },
-    });
+    const clientOptions = URI.startsWith("mongodb+srv:")
+      ? {
+          serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+          },
+        }
+      : {};
+
+    const client = new MongoClient(URI, clientOptions);
     const prompts = client.db(DB_NAME).collection(COLLECTION);
     return { client, prompts };
   };
@@ -36,8 +35,6 @@ function PromptExplorerDB() {
       console.log("Fetched data from Mongo:", data);
       return data;
       // return prompts.find({}).toArray().finally(() => client.close());
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -49,11 +46,9 @@ function PromptExplorerDB() {
     try {
       const result = await prompts.updateOne(
         { _id: new ObjectId(promptId) },
-        { $inc: { [`rating.${rating}`]: 1 } },
+        { $inc: { [`rating.${rating}`]: 1 } }
       );
       return result;
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -67,8 +62,6 @@ function PromptExplorerDB() {
         ...record,
         deletedAt: new Date(),
       });
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -85,8 +78,6 @@ function PromptExplorerDB() {
 
       await prompts.deleteOne({ _id: id });
       return { deleted: true };
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -112,8 +103,6 @@ function PromptExplorerDB() {
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
     try {
       return await recentlyDeleted.findOne({ _id: new ObjectId(promptId) });
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -126,10 +115,8 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         {},
-        { sort: { deletedAt: 1, _id: 1 } },
+        { sort: { deletedAt: 1, _id: 1 } }
       );
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -142,10 +129,8 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         { _id: { $gt: new ObjectId(afterId) } },
-        { sort: { _id: 1 } },
+        { sort: { _id: 1 } }
       );
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -161,8 +146,6 @@ function PromptExplorerDB() {
         _id: new ObjectId(promptId),
       });
       return { deleted: result.deletedCount === 1 };
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -179,14 +162,14 @@ function PromptExplorerDB() {
       });
       if (!prompt) return { approved: false, reason: "not found" };
 
-      const { _id, deletedAt, ...promptToApprove } = prompt;
+      const promptToApprove = { ...prompt };
+      delete promptToApprove._id;
+      delete promptToApprove.deletedAt;
 
       await prompts.insertOne(promptToApprove);
 
       await recentlyDeleted.deleteOne({ _id: new ObjectId(promptId) });
       return { approved: true };
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -200,7 +183,7 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.updateOne(
         { _id: new ObjectId(promptId) },
-        { $set: updates },
+        { $set: updates }
       );
     } finally {
       await client.close();

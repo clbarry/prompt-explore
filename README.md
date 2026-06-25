@@ -23,20 +23,20 @@ Below are screenshots of each page of the website.
 
 ### [Home Page](https://prompt-explore.onrender.com/)
 
-![Home Page Screenshot](./frontend/public/pe_pg1_home.png)
+Home Page Screenshot
 
 ### [Prompts Page](https://prompt-explore.onrender.com/prompts.html)
 
-![Prompts Page Screenshot](./frontend/public/pe_pg2_prompts.png)
+Prompts Page Screenshot
 
 ### [Create Page](https://prompt-explore.onrender.com/create.html)
 
-![Create Page Screenshot](./frontend/public/pe_pg3_create.png)
+Create Page Screenshot
 
 ### [Moderator Page (Hidden Page)](https://prompt-explore.onrender.com/moderator.html)
 
-![Moderator Page Screenshot - top of Page](./frontend/public/pe_pg4a_moderator.png)
-![Moderator Page Screenshot](./frontend/public/pe_pg4b_moderator.png)
+Moderator Page Screenshot - top of Page
+Moderator Page Screenshot
 
 # Demo Video
 
@@ -112,9 +112,8 @@ flowchart TD
 
 - Node.js 18+ recommended
 - npm 9+ recommended
-- MongoDB Atlas credentials configured via environment variables:
-  - MONGOUSER
-  - MONGOPASS
+- MongoDB connection string configured via environment variable:
+  - MONGODB_URI (Atlas or local Docker)
 
 ## Getting Started
 
@@ -137,21 +136,29 @@ Run a MongoDB container with a mapped port and credentials:
 docker run --name prompt-explore -p 27017:27017 -d mongodb/mongodb-community-server:latest
 ```
 
-3. Create your environment variables (for example in `.env`):
+1. Create your environment variables (for example in `.env`):
 
 ```env
-MONGOUSER=your_mongo_username
-MONGOPASS=your_mongo_password
+MONGODB_URI=mongodb+srv://youruser:yourpass@your-cluster.mongodb.net/promptexplore?retryWrites=true&w=majority
 PORT=3300
 ```
 
-4. Run in development mode:
+For local Docker MongoDB instead of Atlas:
+
+```env
+MONGODB_URI=mongodb://localhost:27017
+PORT=3300
+```
+
+Copy your Atlas connection string from **Connect → Drivers** in the MongoDB Atlas UI.
+
+1. Run in development mode:
 
 ```
 npm run dev
 ```
 
-5. Run in production mode:
+1. Run in production mode:
 
 ```
 npm start
@@ -178,7 +185,7 @@ The starter data comes from the [prompts.chat dataset on Hugging Face](https://h
 
 To download the CSV:
 
-1. Go to https://huggingface.co/datasets/fka/prompts.chat
+1. Go to [https://huggingface.co/datasets/fka/prompts.chat](https://huggingface.co/datasets/fka/prompts.chat)
 2. Open the **Files and versions** tab.
 3. Download the CSV file (e.g. `prompts.csv`) into your project root.
 
@@ -232,13 +239,13 @@ This project was developed in connection with the course:
 
 This project is deployed on Render.
 
-Link: (https://prompt-explore.onrender.com/)
+Link: ([https://prompt-explore.onrender.com/](https://prompt-explore.onrender.com/))
 
-Hidden Moderator Page Link: (https://prompt-explore.onrender.com/moderator.html)
+Hidden Moderator Page Link: ([https://prompt-explore.onrender.com/moderator.html](https://prompt-explore.onrender.com/moderator.html))
 
 Deployment note:
 
-- Configure `MONGOUSER`, `MONGOPASS`, and `PORT` in the Render service environment variables.
+- Configure `MONGODB_URI` and `PORT` in the Render service environment variables.
 - Use the start command `npm start` (which runs `node backend.js`).
 
 ## AI Disclosure

@@ -141,29 +141,6 @@ async function submitRating(promptId, state) {
 
   render();
 }
-async function ratePrompt(promptId, value, starGroup) {
-  starGroup.querySelectorAll(".star-btn").forEach((btn) => {
-    const img = btn.querySelector(".star-icon");
-    img.src =
-      parseInt(btn.dataset.value) <= value
-        ? "../public/star.svg"
-        : "../public/empty-star.svg";
-  });
-
-  const prompt = allPrompts.find((p) => String(p._id) === String(promptId));
-  if (prompt) {
-    if (!prompt.rating) prompt.rating = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    prompt.rating[value] = (prompt.rating[value] ?? 0) + 1;
-  }
-
-  await fetch("/api/rate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ promptId, rating: value }),
-  });
-
-  setTimeout(() => render(), 600);
-}
 
 async function doDelete(promptId) {
   const response = await fetch("/api/delete", {
@@ -271,7 +248,7 @@ function buildPromptRow(prompt) {
   submitBtn.className = "submit-rating-btn";
   submitBtn.textContent = "Submit rating";
   submitBtn.addEventListener("click", () =>
-    submitRating(prompt._id, ratingState),
+    submitRating(prompt._id, ratingState)
   );
 
   const deleteBtn = document.createElement("button");

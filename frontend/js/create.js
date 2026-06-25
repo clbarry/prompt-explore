@@ -1,4 +1,5 @@
 /* This file is for JavaScript code related to the create.html page.*/
+/* global bootstrap */
 
 /* MODAL CODE (BOOTSTRAP) */
 /* https://getbootstrap.com/docs/5.3/components/modal/ */

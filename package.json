@@ -8,7 +8,9 @@
     "start": "node backend.js",
     "dev": "nodemon backend.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [],
   "author": "Julia Weppler & Carey Barry",
