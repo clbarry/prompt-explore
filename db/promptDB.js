@@ -35,8 +35,6 @@ function PromptExplorerDB() {
       console.log("Fetched data from Mongo:", data);
       return data;
       // return prompts.find({}).toArray().finally(() => client.close());
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -48,11 +46,9 @@ function PromptExplorerDB() {
     try {
       const result = await prompts.updateOne(
         { _id: new ObjectId(promptId) },
-        { $inc: { [`rating.${rating}`]: 1 } },
+        { $inc: { [`rating.${rating}`]: 1 } }
       );
       return result;
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -66,8 +62,6 @@ function PromptExplorerDB() {
         ...record,
         deletedAt: new Date(),
       });
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -84,8 +78,6 @@ function PromptExplorerDB() {
 
       await prompts.deleteOne({ _id: id });
       return { deleted: true };
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -111,8 +103,6 @@ function PromptExplorerDB() {
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
     try {
       return await recentlyDeleted.findOne({ _id: new ObjectId(promptId) });
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -125,10 +115,8 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         {},
-        { sort: { deletedAt: 1, _id: 1 } },
+        { sort: { deletedAt: 1, _id: 1 } }
       );
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -141,10 +129,8 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.findOne(
         { _id: { $gt: new ObjectId(afterId) } },
-        { sort: { _id: 1 } },
+        { sort: { _id: 1 } }
       );
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -160,8 +146,6 @@ function PromptExplorerDB() {
         _id: new ObjectId(promptId),
       });
       return { deleted: result.deletedCount === 1 };
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -178,14 +162,14 @@ function PromptExplorerDB() {
       });
       if (!prompt) return { approved: false, reason: "not found" };
 
-      const { _id, deletedAt, ...promptToApprove } = prompt;
+      const promptToApprove = { ...prompt };
+      delete promptToApprove._id;
+      delete promptToApprove.deletedAt;
 
       await prompts.insertOne(promptToApprove);
 
       await recentlyDeleted.deleteOne({ _id: new ObjectId(promptId) });
       return { approved: true };
-    } catch (err) {
-      throw err;
     } finally {
       await client.close();
     }
@@ -199,7 +183,7 @@ function PromptExplorerDB() {
     try {
       return await recentlyDeleted.updateOne(
         { _id: new ObjectId(promptId) },
-        { $set: updates },
+        { $set: updates }
       );
     } finally {
       await client.close();
