@@ -241,6 +241,44 @@ function openDeleteModal(promptId) {
   document.body.appendChild(overlay);
 }
 
+async function generatePreview(promptText, btn, container) {
+  if (container.querySelector(".preview-img")) {
+    container.innerHTML = "";
+    btn.textContent = "Preview Image";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Generating...";
+  container.innerHTML = '<span class="preview-loading">Generating image, please wait...</span>';
+
+  try {
+    const res = await fetch("/api/generate-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: promptText }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || data.error) {
+      container.innerHTML = `<span class="preview-error">Could not generate image: ${data.error}</span>`;
+    } else {
+      container.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = data.image;
+      img.alt = "AI generated preview";
+      img.className = "preview-img";
+      container.appendChild(img);
+      btn.textContent = "Hide Preview";
+    }
+  } catch (err) {
+    container.innerHTML = `<span class="preview-error">Error: ${err.message}</span>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 function buildPromptRow(prompt) {
   const row = document.createElement("div");
   row.className = "prompt-row";
@@ -295,14 +333,24 @@ function buildPromptRow(prompt) {
     tags.appendChild(tag);
   }
 
+  const previewBtn = document.createElement("button");
+  previewBtn.className = "preview-btn";
+  previewBtn.textContent = "Preview Image";
+  previewBtn.addEventListener("click", () => generatePreview(prompt.prompt, previewBtn, imageContainer));
+
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "image-preview-container";
+
   actions.appendChild(rateLabel);
   actions.appendChild(stars);
   actions.appendChild(submitBtn);
+  actions.appendChild(previewBtn);
   actions.appendChild(deleteBtn);
   actions.appendChild(tags);
 
   contentCol.appendChild(text);
   contentCol.appendChild(actions);
+  contentCol.appendChild(imageContainer);
 
   row.appendChild(ratingCol);
   row.appendChild(contentCol);
