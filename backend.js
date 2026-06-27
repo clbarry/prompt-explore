@@ -6,8 +6,6 @@ import express from "express";
 import promptsRouter from "./routes/prompts.js";
 import rateRouter from "./routes/rate.js";
 import deleteRouter from "./routes/delete.js";
-import generateImageRouter from "./routes/generate_image.js";
-
 /* CREATE PAGE */
 import createRouter from "./routes/create.js";
 
@@ -29,7 +27,6 @@ app.use(express.static("frontend"));
 app.use("/api", promptsRouter);
 app.use("/api", rateRouter);
 app.use("/api", deleteRouter);
-app.use("/api", generateImageRouter);
 
 /* CREATE PAGE */
 app.use("/api", createRouter);

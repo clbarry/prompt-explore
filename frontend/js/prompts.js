@@ -1,3 +1,14 @@
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast-notification${type === "error" ? " toast-error" : ""}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("toast-fade");
+    toast.addEventListener("transitionend", () => toast.remove());
+  }, 2000);
+}
+
 const PROMPTS_PER_PAGE = 10;
 
 let allPrompts = [];
@@ -139,6 +150,7 @@ async function submitRating(promptId, state) {
     body: JSON.stringify({ promptId, rating: value }),
   });
 
+  showToast("Rating saved!");
   render();
 }
 async function ratePrompt(promptId, value, starGroup) {
@@ -179,6 +191,7 @@ async function doDelete(promptId) {
 
   allPrompts = allPrompts.filter((p) => String(p._id) !== String(promptId));
   currentPage = 1;
+  showToast("Prompt deleted.");
   render();
 }
 
@@ -241,44 +254,6 @@ function openDeleteModal(promptId) {
   document.body.appendChild(overlay);
 }
 
-async function generatePreview(promptText, btn, container) {
-  if (container.querySelector(".preview-img")) {
-    container.innerHTML = "";
-    btn.textContent = "Preview Image";
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = "Generating...";
-  container.innerHTML = '<span class="preview-loading">Generating image, please wait...</span>';
-
-  try {
-    const res = await fetch("/api/generate-image", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: promptText }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok || data.error) {
-      container.innerHTML = `<span class="preview-error">Could not generate image: ${data.error}</span>`;
-    } else {
-      container.innerHTML = "";
-      const img = document.createElement("img");
-      img.src = data.image;
-      img.alt = "AI generated preview";
-      img.className = "preview-img";
-      container.appendChild(img);
-      btn.textContent = "Hide Preview";
-    }
-  } catch (err) {
-    container.innerHTML = `<span class="preview-error">Error: ${err.message}</span>`;
-  } finally {
-    btn.disabled = false;
-  }
-}
-
 function buildPromptRow(prompt) {
   const row = document.createElement("div");
   row.className = "prompt-row";
@@ -333,24 +308,27 @@ function buildPromptRow(prompt) {
     tags.appendChild(tag);
   }
 
-  const previewBtn = document.createElement("button");
-  previewBtn.className = "preview-btn";
-  previewBtn.textContent = "Preview Image";
-  previewBtn.addEventListener("click", () => generatePreview(prompt.prompt, previewBtn, imageContainer));
-
-  const imageContainer = document.createElement("div");
-  imageContainer.className = "image-preview-container";
+  const copyBtn = document.createElement("button");
+  copyBtn.className = "copy-btn";
+  copyBtn.textContent = "Copy";
+  copyBtn.setAttribute("aria-label", "Copy prompt to clipboard");
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(prompt.prompt).then(() => {
+      copyBtn.textContent = "Copied!";
+      showToast("Prompt copied to clipboard!");
+      setTimeout(() => (copyBtn.textContent = "Copy"), 2000);
+    });
+  });
 
   actions.appendChild(rateLabel);
   actions.appendChild(stars);
   actions.appendChild(submitBtn);
-  actions.appendChild(previewBtn);
+  actions.appendChild(copyBtn);
   actions.appendChild(deleteBtn);
   actions.appendChild(tags);
 
   contentCol.appendChild(text);
   contentCol.appendChild(actions);
-  contentCol.appendChild(imageContainer);
 
   row.appendChild(ratingCol);
   row.appendChild(contentCol);

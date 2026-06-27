@@ -1,4 +1,5 @@
 /* Identify DOM Elements */
+const queueCount = document.getElementById("queueCount");
 const btnLoadPrompt = document.getElementById("btn-LoadPrompt");
 const btnDeletePrompt = document.getElementById("btn-DeletePrompt");
 const btnSaveEdits = document.getElementById("btn-SaveEdits");
@@ -7,6 +8,18 @@ const btnApproveEdits = document.getElementById("btn-ApproveEdits");
 /* Define form and log elements */
 const form = document.getElementById("moderatorForm");
 const log = document.getElementById("moderatorLog");
+
+async function refreshQueueCount() {
+  try {
+    const res = await fetch("/api/recently-deleted/count");
+    const data = await res.json();
+    queueCount.textContent = `Queue: ${data.count} prompt${data.count === 1 ? "" : "s"} pending review`;
+  } catch {
+    queueCount.textContent = "";
+  }
+}
+
+refreshQueueCount();
 
 /* Event Listeners for Moderator Actions */
 
@@ -36,6 +49,7 @@ async function loadPrompt(after) {
     form.elements["prompt"].value = prompt.prompt || "";
     form.elements["contributor"].value = prompt.contributor || "";
     log.textContent = "Prompt loaded successfully!";
+    refreshQueueCount();
   } catch (error) {
     console.error("Load prompt failed:", error);
     if (error.message.includes("404")) {
@@ -69,6 +83,7 @@ async function deletePrompt(promptId) {
     if (response.ok) {
       form.reset();
       log.textContent = "Prompt deleted successfully!";
+      refreshQueueCount();
     } else {
       log.textContent = result.error || "Delete failed. Please try again.";
     }
@@ -181,4 +196,5 @@ btnApproveEdits.addEventListener("click", async () => {
 
   form.reset();
   log.textContent = "Prompt edits approved and moved back to prompts.";
+  refreshQueueCount();
 });

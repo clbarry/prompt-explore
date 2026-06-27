@@ -1,5 +1,16 @@
 /* This file is for JavaScript code related to the create.html page.*/
 
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast-notification${type === "error" ? " toast-error" : ""}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("toast-fade");
+    toast.addEventListener("transitionend", () => toast.remove());
+  }, 2000);
+}
+
 /* MODAL CODE (BOOTSTRAP) */
 /* https://getbootstrap.com/docs/5.3/components/modal/ */
 
@@ -48,8 +59,10 @@ async function sendData() {
     if (response.ok) {
       form.reset();
       log.textContent = "Prompt submitted successfully!";
+      showToast("Prompt submitted!");
     } else {
       log.textContent = result.error || "Submit failed. Please try again.";
+      showToast(result.error || "Submit failed.", "error");
     }
   } catch (e) {
     console.error(e);

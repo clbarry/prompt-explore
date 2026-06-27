@@ -316,47 +316,20 @@
   color: #fff;
 }
 
-/* Image Preview */
-.preview-btn {
+/* Copy Button */
+.copy-btn {
   background: transparent;
-  border: 1.5px solid #a78bfa;
-  color: #a78bfa;
+  border: 1.5px solid #ffffff55;
+  color: #ffffffcc;
   border-radius: 9999px;
   padding: 0.3rem 1rem;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.preview-btn:hover:not(:disabled) {
-  background: #a78bfa;
-  color: #fff;
-}
-
-.preview-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.image-preview-container {
-  margin-top: 0.75rem;
-}
-
-.preview-img {
-  max-width: 100%;
-  max-height: 320px;
-  border-radius: 8px;
-  border: 1px solid #a78bfa44;
-  display: block;
-}
-
-.preview-loading {
-  font-size: 0.85rem;
-  color: #a78bfa;
-  font-style: italic;
-}
-
-.preview-error {
-  font-size: 0.85rem;
-  color: #f87171;
+.copy-btn:hover {
+  background: #ffffff22;
+  border-color: #ffffff;
+  color: #ffffff;
 }
