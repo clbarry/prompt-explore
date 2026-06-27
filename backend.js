@@ -6,7 +6,6 @@ import express from "express";
 import promptsRouter from "./routes/prompts.js";
 import rateRouter from "./routes/rate.js";
 import deleteRouter from "./routes/delete.js";
-
 /* CREATE PAGE */
 import createRouter from "./routes/create.js";
 

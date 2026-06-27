@@ -6,7 +6,7 @@ import promptDB from "../db/promptDB.js";
 const router = express.Router();
 
 router.post("/create", async (req, res) => {
-  const { use, prompt, contributor, rating } = req.body;
+  const { use, prompt, contributor } = req.body;
 
   if (!use || !prompt || !contributor) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -17,7 +17,7 @@ router.post("/create", async (req, res) => {
       use,
       prompt,
       contributor,
-      rating,
+      rating: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
     });
     res.status(201).json({ success: true, id: result.insertedId });
   } catch (error) {

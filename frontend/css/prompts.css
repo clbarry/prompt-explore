@@ -315,3 +315,21 @@
   background: #6f42c1;
   color: #fff;
 }
+
+/* Copy Button */
+.copy-btn {
+  background: transparent;
+  border: 1.5px solid #ffffff55;
+  color: #ffffffcc;
+  border-radius: 9999px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.copy-btn:hover {
+  background: #ffffff22;
+  border-color: #ffffff;
+  color: #ffffff;
+}

@@ -31,4 +31,13 @@ router.get("/recently-deleted", async (req, res) => {
   }
 });
 
+router.get("/recently-deleted/count", async (req, res) => {
+  try {
+    const count = await promptDB.countRecentlyDeleted();
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;

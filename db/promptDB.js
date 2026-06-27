@@ -13,7 +13,6 @@ function PromptExplorerDB() {
   const encodedUser = encodeURIComponent(USER);
   const encodedPass = encodeURIComponent(PASS);
   const URI = `mongodb+srv://${encodedUser}:${encodedPass}@prompt-explore-cluster.bu1xeuj.mongodb.net/?appName=prompt-explore-cluster`;
-  // const URI = "mongodb://localhost:27017";
   const DB_NAME = "promptexplore";
   const COLLECTION = "prompts";
   const RECENTLY_DELETED = "recently_deleted";
@@ -83,7 +82,11 @@ function PromptExplorerDB() {
 
       await me.createRecentlyDeleted(prompt);
 
-      await prompts.deleteOne({ _id: id });
+      const del = await prompts.deleteOne({ _id: id });
+      if (del.deletedCount === 0) {
+        await client.db(DB_NAME).collection(RECENTLY_DELETED).deleteOne({ _id: prompt._id });
+        throw new Error("Failed to delete original prompt");
+      }
       return { deleted: true };
     } catch (err) {
       throw err;
@@ -120,6 +123,16 @@ function PromptExplorerDB() {
   };
 
   /* Load the first prompt from Recently Deleted */
+  me.countRecentlyDeleted = async () => {
+    const { client } = connect();
+    const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);
+    try {
+      return await recentlyDeleted.countDocuments();
+    } finally {
+      await client.close();
+    }
+  };
+
   me.getFirstRecentlyDeleted = async () => {
     const { client } = connect();
     const recentlyDeleted = client.db(DB_NAME).collection(RECENTLY_DELETED);

@@ -97,3 +97,11 @@ body {
   color: #ffffff;
   font-weight: 700;
 }
+
+.queue-count {
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  color: #a78bfa;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}

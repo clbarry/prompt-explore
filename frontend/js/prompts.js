@@ -1,3 +1,14 @@
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast-notification${type === "error" ? " toast-error" : ""}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("toast-fade");
+    toast.addEventListener("transitionend", () => toast.remove());
+  }, 2000);
+}
+
 const PROMPTS_PER_PAGE = 10;
 
 let allPrompts = [];
@@ -139,6 +150,7 @@ async function submitRating(promptId, state) {
     body: JSON.stringify({ promptId, rating: value }),
   });
 
+  showToast("Rating saved!");
   render();
 }
 async function ratePrompt(promptId, value, starGroup) {
@@ -179,6 +191,7 @@ async function doDelete(promptId) {
 
   allPrompts = allPrompts.filter((p) => String(p._id) !== String(promptId));
   currentPage = 1;
+  showToast("Prompt deleted.");
   render();
 }
 
@@ -295,9 +308,22 @@ function buildPromptRow(prompt) {
     tags.appendChild(tag);
   }
 
+  const copyBtn = document.createElement("button");
+  copyBtn.className = "copy-btn";
+  copyBtn.textContent = "Copy";
+  copyBtn.setAttribute("aria-label", "Copy prompt to clipboard");
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(prompt.prompt).then(() => {
+      copyBtn.textContent = "Copied!";
+      showToast("Prompt copied to clipboard!");
+      setTimeout(() => (copyBtn.textContent = "Copy"), 2000);
+    });
+  });
+
   actions.appendChild(rateLabel);
   actions.appendChild(stars);
   actions.appendChild(submitBtn);
+  actions.appendChild(copyBtn);
   actions.appendChild(deleteBtn);
   actions.appendChild(tags);
 
